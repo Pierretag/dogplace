@@ -1,0 +1,61 @@
+# CLIne Prompt for Restaurant Discovery Platform Backend
+
+Hi CLIne, I need your help to develop and manage the backend for my dogfriendly place discovery platform.
+
+## What I want to do
+
+I'm developing a petfriendly recomandation platform that helps dog owners to find new places to go with their dog. The backend uses nodejs with a PostgreSQL database. I need help building a CRUD API based on my existing database schema.
+
+## Technologies used
+
+- Backend: nodejs using koaJs and typescript 
+- Database: PostgreSQL (self-hosted)
+- Monitoring: Grafana
+
+## Common tasks I need help with
+
+1. **Launch the development server** with hot-reloading
+2. **Read and analyze** my datamodel.sql file to understand the schema
+3. **Generate a complete CRUD API** based on the database schema
+4. **Create API endpoints** for 'place' entity in the database.
+5. **Implement data validation** for API requests
+6. **Run database migrations** when needed
+7. **Test the API endpoints** for correctness and performance
+
+## Environment variables needed
+
+For any command, make sure these environment variables are properly configured:
+- DATABASE_URL=postgres://user:password@localhost:5432/dogplace
+- ENVIRONMENT=development
+- LOG_LEVEL=debug
+- PORT=8000
+
+## Project structure
+
+Our architecture follows a modular structure:
+- src/
+  - server.ts         # Main entry point
+  - routes/           # API route definitions
+  - controllers/      # Controller logic
+  - models/           # Data models
+  - services/         # Business logic services
+  - db/               # Database migration and connections
+  - utils/            # Utilities
+  - middleware/       # Custom middleware
+
+## Important notes
+
+- We need to implement proper error handling for all database operations
+- Performance is critical - we need to maintain response times < 100ms
+- The database must be backed up before each migration
+- Implement pagination for endpoints 
+- Ensure proper indexing is set up for frequent query patterns
+- All API endpoints should follow RESTful conventions
+
+## First tasks
+
+1. Please read the datamodel.sql file and analyze the schema
+2. Generate model files based on the tables defined in the schema
+3. Create controller files with CRUD operations for each model
+4. Set up route files to connect controllers to API endpoints
+5. Implement middleware for authentication and request validation
