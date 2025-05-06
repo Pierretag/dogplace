@@ -1,0 +1,2 @@
+ALTER TABLE places
+ALTER COLUMN map_rating TYPE DECIMAL(3,1);

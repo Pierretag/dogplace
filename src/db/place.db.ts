@@ -295,6 +295,11 @@ export const searchPlaces = async (
     conditions.push(`p.address ILIKE $${paramIndex++}`);
     values.push(`%${filters.address}%`);
   }
+
+  if(filters.map_place_id){
+    conditions.push(`p.map_place_id ILIKE $${paramIndex++}`);
+    values.push(`%${filters.map_place_id}%`);
+  }
   
   // Create the WHERE clause
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';

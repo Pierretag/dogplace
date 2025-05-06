@@ -7,7 +7,7 @@ CREATE TABLE places (
     sub_category VARCHAR(200) NOT NULL,
     pet_classification VARCHAR(200) NOT NULL,
     map_nbreviews integer, 
-    map_rating integer,
+    map_rating DECIMAL(3,1),
     map_pricelevel integer,
     map_url TEXT UNIQUE,
     map_place_id TEXT,

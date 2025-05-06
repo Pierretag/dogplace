@@ -15,14 +15,17 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "migrate": "ts-node src/db/migrations/run-migrations.ts",
-    "migrate:dev": "ts-node src/db/migrations/run-migrations.ts && npm run dev"
+    "migrate:dev": "ts-node src/db/migrations/run-migrations.ts && npm run dev",
+    "import-restaurants": "ts-node src/scripts/import-restaurants.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "@koa/router": "^13.1.0",
+    "@types/koa__cors": "^5.0.0",
     "dotenv": "^16.5.0",
     "koa": "^3.0.0",
     "koa-bodyparser": "^4.4.1",

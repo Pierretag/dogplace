@@ -1,0 +1,903 @@
+2025-05-05 16:09:57.128 WEST [48717] LOG:  starting PostgreSQL 16.8 (Homebrew) on aarch64-apple-darwin24.2.0, compiled by Apple clang version 16.0.0 (clang-1600.0.26.6), 64-bit
+2025-05-05 16:09:57.129 WEST [48717] LOG:  listening on IPv6 address "::1", port 5432
+2025-05-05 16:09:57.129 WEST [48717] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2025-05-05 16:09:57.130 WEST [48717] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2025-05-05 16:09:57.131 WEST [48720] LOG:  database system was shut down at 2025-05-05 16:09:43 WEST
+2025-05-05 16:09:57.134 WEST [48717] LOG:  database system is ready to accept connections
+2025-05-05 16:13:13.996 WEST [49136] FATAL:  database "pierreneveu" does not exist
+2025-05-05 16:14:57.130 WEST [48718] LOG:  checkpoint starting: time
+2025-05-05 16:15:01.606 WEST [48718] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.471 s, sync=0.003 s, total=4.477 s; sync files=11, longest=0.001 s, average=0.001 s; distance=278 kB, estimate=278 kB; lsn=0/155F280, redo lsn=0/155F248
+2025-05-05 16:16:26.028 WEST [49157] ERROR:  database "dogplace" does not exist
+2025-05-05 16:16:26.028 WEST [49157] STATEMENT:  GRANT ALL PRIVILEGES ON DATABASE dogplace TO pneveu;
+2025-05-05 16:17:16.549 WEST [49157] ERROR:  syntax error at or near "CREATE" at character 17
+2025-05-05 16:17:16.549 WEST [49157] STATEMENT:  select database
+	CREATE DATABASE dogplace
+	;
+2025-05-05 16:19:57.606 WEST [48718] LOG:  checkpoint starting: time
+2025-05-05 16:20:34.066 WEST [49408] ERROR:  permission denied for schema public at character 35
+2025-05-05 16:20:34.066 WEST [49408] STATEMENT:  
+	      CREATE TABLE IF NOT EXISTS migrations (
+	        id SERIAL PRIMARY KEY,
+	        name VARCHAR(255) NOT NULL UNIQUE,
+	        applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+	      )
+	    
+2025-05-05 16:21:34.102 WEST [48718] LOG:  checkpoint complete: wrote 954 buffers (5.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=96.478 s, sync=0.014 s, total=96.497 s; sync files=307, longest=0.001 s, average=0.001 s; distance=4369 kB, estimate=4369 kB; lsn=0/19A36B0, redo lsn=0/19A3678
+2025-05-05 16:22:49.378 WEST [49529] WARNING:  no privileges were granted for "public"
+2025-05-05 16:22:58.391 WEST [49549] FATAL:  database "postgre" does not exist
+2025-05-05 16:23:39.477 WEST [49630] ERROR:  permission denied for schema public at character 35
+2025-05-05 16:23:39.477 WEST [49630] STATEMENT:  
+	      CREATE TABLE IF NOT EXISTS migrations (
+	        id SERIAL PRIMARY KEY,
+	        name VARCHAR(255) NOT NULL UNIQUE,
+	        applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+	      )
+	    
+2025-05-05 16:24:57.106 WEST [48718] LOG:  checkpoint starting: time
+2025-05-05 16:24:57.831 WEST [48718] LOG:  checkpoint complete: wrote 8 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.717 s, sync=0.002 s, total=0.726 s; sync files=8, longest=0.001 s, average=0.001 s; distance=2 kB, estimate=3932 kB; lsn=0/19A4158, redo lsn=0/19A4120
+2025-05-05 16:25:03.292 WEST [49904] ERROR:  permission denied for schema public at character 35
+2025-05-05 16:25:03.292 WEST [49904] STATEMENT:  
+	      CREATE TABLE IF NOT EXISTS migrations (
+	        id SERIAL PRIMARY KEY,
+	        name VARCHAR(255) NOT NULL UNIQUE,
+	        applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+	      )
+	    
+2025-05-05 16:25:14.347 WEST [49871] ERROR:  syntax error at or near "/" at character 1
+2025-05-05 16:25:14.347 WEST [49871] STATEMENT:  /c dogplace
+	;
+2025-05-05 16:25:38.412 WEST [49871] ERROR:  syntax error at or near "c" at character 1
+2025-05-05 16:25:38.412 WEST [49871] STATEMENT:  c dogplace
+	;
+2025-05-05 16:26:29.641 WEST [49965] FATAL:  role "postgres" does not exist
+2025-05-05 16:28:29.105 WEST [50049] ERROR:  permission denied for schema public at character 35
+2025-05-05 16:28:29.105 WEST [50049] STATEMENT:  
+	      CREATE TABLE IF NOT EXISTS migrations (
+	        id SERIAL PRIMARY KEY,
+	        name VARCHAR(255) NOT NULL UNIQUE,
+	        applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+	      )
+	    
+2025-05-05 16:29:57.831 WEST [48718] LOG:  checkpoint starting: time
+2025-05-05 16:29:58.042 WEST [48718] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.206 s, sync=0.001 s, total=0.212 s; sync files=3, longest=0.001 s, average=0.001 s; distance=2 kB, estimate=3539 kB; lsn=0/19A4BE8, redo lsn=0/19A4BB0
+2025-05-05 16:30:00.368 WEST [50116] ERROR:  permission denied for schema public at character 35
+2025-05-05 16:30:00.368 WEST [50116] STATEMENT:  
+	      CREATE TABLE IF NOT EXISTS migrations (
+	        id SERIAL PRIMARY KEY,
+	        name VARCHAR(255) NOT NULL UNIQUE,
+	        applied_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+	      )
+	    
+2025-05-05 16:31:42.355 WEST [50189] FATAL:  role "postgres" does not exist
+2025-05-05 16:31:50.319 WEST [50197] FATAL:  role "postgres" does not exist
+2025-05-05 16:33:10.701 WEST [50205] ERROR:  relation "place" does not exist at character 15
+2025-05-05 16:33:10.701 WEST [50205] STATEMENT:  select * from place
+	;
+2025-05-05 16:34:57.043 WEST [48718] LOG:  checkpoint starting: time
+2025-05-05 16:35:09.271 WEST [48718] LOG:  checkpoint complete: wrote 121 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=12.217 s, sync=0.006 s, total=12.229 s; sync files=78, longest=0.001 s, average=0.001 s; distance=503 kB, estimate=3235 kB; lsn=0/1A22B50, redo lsn=0/1A22B18
+2025-05-06 10:30:28.662 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.662 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.662 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.667 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.667 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.667 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.671 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:28.671 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.671 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.675 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.675 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.675 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.680 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:28.680 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.680 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.684 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.684 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.684 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.687 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.687 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.687 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.691 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.691 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.691 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.696 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.696 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.696 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.701 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.701 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.701 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.704 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.704 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.704 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.707 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.707 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.707 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.713 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.713 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.713 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.717 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.717 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.717 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.720 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.720 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.720 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.727 WEST [55023] ERROR:  invalid input syntax for type integer: "3.9"
+2025-05-06 10:30:28.727 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.727 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.731 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.731 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.731 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.736 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.736 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.736 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.739 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.739 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.739 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.743 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.743 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.743 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.747 WEST [55023] ERROR:  invalid input syntax for type integer: "2.6"
+2025-05-06 10:30:28.747 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.747 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.751 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:28.751 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.751 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.756 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.756 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.756 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.762 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:28.762 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.762 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.768 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.768 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.768 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.776 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.776 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.776 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.780 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.780 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.780 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.785 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:28.785 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.785 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.796 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.796 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.796 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.804 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.804 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.804 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.812 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:28.812 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.812 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.819 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.819 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.819 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.825 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.825 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.825 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.829 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.829 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.829 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.837 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.837 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.837 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.841 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.841 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.841 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.846 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.846 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.846 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.850 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.850 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.850 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.854 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.854 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.854 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.859 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.859 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.859 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.862 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:28.862 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.862 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.866 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.866 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.866 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.869 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.869 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.869 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.873 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.873 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.873 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.876 WEST [55023] ERROR:  invalid input syntax for type integer: "3.1"
+2025-05-06 10:30:28.876 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.876 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.879 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.879 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.879 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.886 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.886 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.886 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.889 WEST [55023] ERROR:  invalid input syntax for type integer: "4.1"
+2025-05-06 10:30:28.889 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.889 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.893 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.893 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.893 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.896 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.896 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.896 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.899 WEST [55023] ERROR:  invalid input syntax for type integer: "3.2"
+2025-05-06 10:30:28.899 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.899 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.902 WEST [55023] ERROR:  invalid input syntax for type integer: "4.9"
+2025-05-06 10:30:28.902 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.902 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.906 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:28.906 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.906 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.908 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.908 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.908 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.911 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.911 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.911 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.916 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:28.916 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.916 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.928 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:28.928 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.928 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.946 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.946 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.946 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.990 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:28.990 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.990 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:28.993 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:28.993 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:28.993 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:29.004 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.004 WEST [55023] CONTEXT:  unnamed portal parameter $8 = '...'
+2025-05-06 10:30:29.004 WEST [55023] STATEMENT:  INSERT INTO places (
+	        coordinate_id, name, address, category, sub_category, pet_classification,
+	        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
+	      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+	      RETURNING *
+2025-05-06 10:30:29.018 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:29.018 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.018 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.021 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.021 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.021 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.025 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.025 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.025 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.028 WEST [55023] ERROR:  invalid input syntax for type integer: "4.1"
+2025-05-06 10:30:29.028 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.028 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.031 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:29.031 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.031 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.034 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:29.034 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.034 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.037 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:29.037 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.037 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.041 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:29.041 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.041 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.045 WEST [55023] ERROR:  invalid input syntax for type integer: "3.8"
+2025-05-06 10:30:29.045 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.045 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.047 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.047 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.047 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.050 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:29.050 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.050 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.053 WEST [55023] ERROR:  invalid input syntax for type integer: "3.8"
+2025-05-06 10:30:29.053 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.053 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.059 WEST [55023] ERROR:  invalid input syntax for type integer: "3.8"
+2025-05-06 10:30:29.059 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.059 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.062 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.062 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.062 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.067 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.067 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.067 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.071 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.071 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.071 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.075 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.075 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.075 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.079 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.079 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.079 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.083 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.083 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.083 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.086 WEST [55023] ERROR:  invalid input syntax for type integer: "3.9"
+2025-05-06 10:30:29.086 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.086 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.088 WEST [55023] ERROR:  invalid input syntax for type integer: "3.8"
+2025-05-06 10:30:29.088 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.088 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.093 WEST [55023] ERROR:  invalid input syntax for type integer: "3.5"
+2025-05-06 10:30:29.093 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.093 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.096 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:29.096 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.096 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.100 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:29.100 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.100 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.104 WEST [55023] ERROR:  invalid input syntax for type integer: "3.7"
+2025-05-06 10:30:29.104 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.104 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.107 WEST [55023] ERROR:  invalid input syntax for type integer: "4.1"
+2025-05-06 10:30:29.107 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.107 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.110 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:29.110 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.110 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.116 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.116 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.116 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.119 WEST [55023] ERROR:  invalid input syntax for type integer: "4.2"
+2025-05-06 10:30:29.119 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.119 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.123 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.123 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.123 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.127 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.127 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.127 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.130 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.130 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.130 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.135 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.135 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.135 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.139 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.139 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.139 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.142 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.142 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.142 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.146 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:29.146 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.146 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.150 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.150 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.150 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.154 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.154 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.154 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.157 WEST [55023] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:30:29.157 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.157 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.162 WEST [55023] ERROR:  invalid input syntax for type integer: "4.8"
+2025-05-06 10:30:29.162 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.162 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.167 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.167 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.167 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.171 WEST [55023] ERROR:  invalid input syntax for type integer: "3.8"
+2025-05-06 10:30:29.171 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.171 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.174 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.174 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.174 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.178 WEST [55023] ERROR:  invalid input syntax for type integer: "4.7"
+2025-05-06 10:30:29.178 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.178 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.182 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.182 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.182 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.186 WEST [55023] ERROR:  invalid input syntax for type integer: "4.5"
+2025-05-06 10:30:29.186 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.186 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.189 WEST [55023] ERROR:  invalid input syntax for type integer: "4.1"
+2025-05-06 10:30:29.189 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.189 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.193 WEST [55023] ERROR:  invalid input syntax for type integer: "4.3"
+2025-05-06 10:30:29.193 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.193 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.196 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.196 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.196 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:30:29.200 WEST [55023] ERROR:  invalid input syntax for type integer: "4.4"
+2025-05-06 10:30:29.200 WEST [55023] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:30:29.200 WEST [55023] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:31:30.281 WEST [55097] ERROR:  invalid input syntax for type integer: "4.6"
+2025-05-06 10:31:30.281 WEST [55097] CONTEXT:  unnamed portal parameter $2 = '...'
+2025-05-06 10:31:30.281 WEST [55097] STATEMENT:  UPDATE places 
+	       SET map_nbreviews = $1, map_rating = $2, updated_at = $3 
+	       WHERE id = $4 
+	       RETURNING *
+2025-05-06 10:32:37.878 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 10:32:41.446 WEST [48718] LOG:  checkpoint complete: wrote 36 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.561 s, sync=0.002 s, total=3.570 s; sync files=22, longest=0.001 s, average=0.001 s; distance=35 kB, estimate=2915 kB; lsn=0/1A2B820, redo lsn=0/1A2B7E8
+2025-05-06 11:02:37.483 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:02:41.468 WEST [48718] LOG:  checkpoint complete: wrote 40 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.974 s, sync=0.005 s, total=3.988 s; sync files=40, longest=0.001 s, average=0.001 s; distance=250 kB, estimate=2649 kB; lsn=0/1A6A1E0, redo lsn=0/1A6A1A8
+2025-05-06 11:07:37.469 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:07:37.684 WEST [48718] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.208 s, sync=0.001 s, total=0.218 s; sync files=3, longest=0.001 s, average=0.001 s; distance=3 kB, estimate=2384 kB; lsn=0/1A6B0F8, redo lsn=0/1A6B0C0
+2025-05-06 11:12:37.685 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:12:39.630 WEST [48718] LOG:  checkpoint complete: wrote 20 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=1.941 s, sync=0.002 s, total=1.948 s; sync files=18, longest=0.001 s, average=0.001 s; distance=123 kB, estimate=2158 kB; lsn=0/1A89EB0, redo lsn=0/1A89E78
+2025-05-06 11:12:43.790 WEST [57001] ERROR:  syntax error at or near "s" at character 9
+2025-05-06 11:12:43.790 WEST [57001] STATEMENT:  EXPLAIN s
+	;
+2025-05-06 11:12:44.344 WEST [57001] ERROR:  syntax error at or near "sele" at character 9
+2025-05-06 11:12:44.344 WEST [57001] STATEMENT:  EXPLAIN sele
+	;
+2025-05-06 11:12:46.214 WEST [57001] ERROR:  column "cou" does not exist at character 16
+2025-05-06 11:12:46.214 WEST [57001] STATEMENT:  EXPLAIN select cou
+	;
+2025-05-06 11:12:46.731 WEST [57001] ERROR:  count(*) must be used to call a parameterless aggregate function at character 16
+2025-05-06 11:12:46.731 WEST [57001] STATEMENT:  EXPLAIN select count()
+	;
+2025-05-06 11:12:48.553 WEST [57001] ERROR:  syntax error at or near ";" at character 31
+2025-05-06 11:12:48.553 WEST [57001] STATEMENT:  EXPLAIN select count(*) from 
+	;
+2025-05-06 11:12:51.207 WEST [57001] ERROR:  relation "dogl" does not exist at character 30
+2025-05-06 11:12:51.207 WEST [57001] STATEMENT:  EXPLAIN select count(*) from dogl
+	;
+2025-05-06 11:12:51.829 WEST [57001] ERROR:  relation "dogplace" does not exist at character 30
+2025-05-06 11:12:51.829 WEST [57001] STATEMENT:  EXPLAIN select count(*) from dogplace
+	;
+2025-05-06 11:12:52.146 WEST [57001] ERROR:  relation "dogplace" does not exist at character 30
+2025-05-06 11:12:52.146 WEST [57001] STATEMENT:  EXPLAIN select count(*) from dogplace;
+2025-05-06 11:12:53.379 WEST [57001] ERROR:  relation "dogplace" does not exist at character 30
+2025-05-06 11:12:53.379 WEST [57001] STATEMENT:  EXPLAIN select count(*) from dogplace
+	;
+2025-05-06 11:12:53.801 WEST [57001] ERROR:  syntax error at or near ";" at character 31
+2025-05-06 11:12:53.801 WEST [57001] STATEMENT:  EXPLAIN select count(*) from 
+	;
+2025-05-06 11:12:54.004 WEST [57001] ERROR:  relation "p" does not exist at character 30
+2025-05-06 11:12:54.004 WEST [57001] STATEMENT:  EXPLAIN select count(*) from p
+	;
+2025-05-06 11:12:54.429 WEST [57001] ERROR:  relation "pla" does not exist at character 30
+2025-05-06 11:12:54.429 WEST [57001] STATEMENT:  EXPLAIN select count(*) from pla
+	;
+2025-05-06 11:12:54.745 WEST [57001] ERROR:  relation "place" does not exist at character 30
+2025-05-06 11:12:54.745 WEST [57001] STATEMENT:  EXPLAIN select count(*) from place
+	;
+2025-05-06 11:12:55.163 WEST [57001] ERROR:  syntax error at or near ":" at character 36
+2025-05-06 11:12:55.163 WEST [57001] STATEMENT:  EXPLAIN select count(*) from places:
+	;
+2025-05-06 11:16:42.474 WEST [57120] ERROR:  syntax error at or near "D" at character 9
+2025-05-06 11:16:42.474 WEST [57120] STATEMENT:  EXPLAIN D
+	;
+2025-05-06 11:16:43.012 WEST [57120] ERROR:  syntax error at or near "DELE" at character 9
+2025-05-06 11:16:43.012 WEST [57120] STATEMENT:  EXPLAIN DELE
+	;
+2025-05-06 11:16:44.855 WEST [57120] ERROR:  syntax error at or near "DEL" at character 9
+2025-05-06 11:16:44.855 WEST [57120] STATEMENT:  EXPLAIN DEL
+	;
+2025-05-06 11:16:45.072 WEST [57120] ERROR:  syntax error at or near "DE" at character 9
+2025-05-06 11:16:45.072 WEST [57120] STATEMENT:  EXPLAIN DE
+	;
+2025-05-06 11:16:45.487 WEST [57120] ERROR:  syntax error at or near "D" at character 9
+2025-05-06 11:16:45.487 WEST [57120] STATEMENT:  EXPLAIN D
+	;
+2025-05-06 11:16:46.581 WEST [57120] ERROR:  syntax error at or near "D" at character 9
+2025-05-06 11:16:46.581 WEST [57120] STATEMENT:  EXPLAIN D
+	;
+2025-05-06 11:16:47.085 WEST [57120] ERROR:  syntax error at or near "DELE" at character 9
+2025-05-06 11:16:47.085 WEST [57120] STATEMENT:  EXPLAIN DELE
+	;
+2025-05-06 11:16:47.497 WEST [57120] ERROR:  syntax error at or near ";" at character 16
+2025-05-06 11:16:47.497 WEST [57120] STATEMENT:  EXPLAIN DELETE
+	;
+2025-05-06 11:16:47.613 WEST [57120] ERROR:  syntax error at or near ";" at character 17
+2025-05-06 11:16:47.613 WEST [57120] STATEMENT:  EXPLAIN DELETE 
+	;
+2025-05-06 11:16:49.002 WEST [57120] ERROR:  syntax error at or near "d" at character 9
+2025-05-06 11:16:49.002 WEST [57120] STATEMENT:  EXPLAIN d
+	;
+2025-05-06 11:17:07.572 WEST [57120] ERROR:  syntax error at or near "TRUNCATE" at character 9
+2025-05-06 11:17:07.572 WEST [57120] STATEMENT:  EXPLAIN TRUNCATE TABLE table_name;
+2025-05-06 11:17:09.095 WEST [57120] ERROR:  syntax error at or near "TRUNCATE" at character 9
+2025-05-06 11:17:09.095 WEST [57120] STATEMENT:  EXPLAIN TRUNCATE TABLE p;
+2025-05-06 11:17:10.036 WEST [57120] ERROR:  syntax error at or near "TRUNCATE" at character 9
+2025-05-06 11:17:10.036 WEST [57120] STATEMENT:  EXPLAIN TRUNCATE TABLE places;
+2025-05-06 11:17:28.837 WEST [57120] ERROR:  syntax error at or near "TRUNCATE" at character 9
+2025-05-06 11:17:28.837 WEST [57120] STATEMENT:  EXPLAIN TRUNCATE TABLE places;
+2025-05-06 11:17:37.630 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:17:40.182 WEST [48718] LOG:  checkpoint complete: wrote 26 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.538 s, sync=0.003 s, total=2.554 s; sync files=34, longest=0.001 s, average=0.001 s; distance=48 kB, estimate=1947 kB; lsn=0/1A961E0, redo lsn=0/1A961A8
+2025-05-06 11:22:37.182 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:22:41.851 WEST [48718] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.662 s, sync=0.003 s, total=4.670 s; sync files=20, longest=0.001 s, average=0.001 s; distance=213 kB, estimate=1774 kB; lsn=0/1ACB998, redo lsn=0/1ACB960
+2025-05-06 11:27:37.850 WEST [48718] LOG:  checkpoint starting: time
+2025-05-06 11:27:40.093 WEST [48718] LOG:  checkpoint complete: wrote 23 buffers (0.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.237 s, sync=0.002 s, total=2.244 s; sync files=14, longest=0.001 s, average=0.001 s; distance=62 kB, estimate=1603 kB; lsn=0/1ADB1B0, redo lsn=0/1ADB178

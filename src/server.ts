@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
+import cors from '@koa/cors';
 import { config } from './config/environment';
 import { pool } from './config/database';
 import { errorMiddleware } from './middleware/error.middleware';
@@ -18,6 +19,7 @@ app.use(async (ctx, next) => {
 
 // Add middleware
 app.use(errorMiddleware);
+app.use(cors());
 app.use(logger());
 app.use(bodyParser());
 
