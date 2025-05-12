@@ -11,6 +11,7 @@
     "start": "node dist/server.js",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
     "build": "tsc",
+    "dockerize": "docker build -t dogplace .",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
