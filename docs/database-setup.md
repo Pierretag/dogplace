@@ -39,6 +39,14 @@ GRANT ALL PRIVILEGES ON DATABASE dogplace TO dogplace_user;
 \c dogplace
 ```
 
+6. Redo all the configuration just in case 
+```sql
+GRANT ALL PRIVILEGES ON DATABASE dogplace TO dogplace_user;
+```
+```sql
+CREATE USER dogplace_user WITH ENCRYPTED PASSWORD 'your_password';
+```
+
 ## Environment Configuration
 
 Update the `.env` file with your database connection string:
