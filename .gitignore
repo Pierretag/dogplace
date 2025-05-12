@@ -1,7 +1,8 @@
 # db
-./db/ 
 
-./file/
+file/
+file/**
+
 # Dependencies
 node_modules/
 
