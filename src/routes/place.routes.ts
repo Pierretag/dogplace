@@ -1,6 +1,6 @@
 import Router from '@koa/router';
 import * as placeController from '../controllers/place.controller';
-import { validate, validateCreatePlace, validateUpdatePlace, validateSearchParams } from '../middleware/validation.middleware';
+import { validate, validateCreatePlace, validateUpdatePlace, validateSearchParams, validateBulkImport } from '../middleware/validation.middleware';
 import { authMiddleware } from '../middleware/auth.middleware';
 
 // Create router
@@ -26,5 +26,8 @@ router.put('/:id', validate(validateUpdatePlace), placeController.updatePlace);
 
 // Delete a place
 router.delete('/:id', placeController.deletePlace);
+
+// Bulk import places
+router.post('/bulk-import', validate(validateBulkImport), placeController.bulkImportPlaces);
 
 export default router;

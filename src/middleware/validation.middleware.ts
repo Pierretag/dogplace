@@ -212,6 +212,59 @@ export const validateUpdatePlace = (data: any): ValidationResult => {
  * @param data Search parameters
  * @returns Validation result
  */
+/**
+ * Validate bulk import request
+ * @param data Bulk import data
+ * @returns Validation result
+ */
+export const validateBulkImport = (data: any): ValidationResult => {
+  const errors: string[] = [];
+
+  // Check if restaurants array exists
+  if (!data.restaurants || !Array.isArray(data.restaurants)) {
+    errors.push('Restaurants array is required');
+    return {
+      valid: false,
+      errors
+    };
+  }
+
+  // Validate each restaurant
+  data.restaurants.forEach((restaurant: any, index: number) => {
+    if (!restaurant.place_id) {
+      errors.push(`Restaurant at index ${index}: place_id is required`);
+    }
+    if (!restaurant.name) {
+      errors.push(`Restaurant at index ${index}: name is required`);
+    }
+    if (!restaurant.coordinates || 
+        typeof restaurant.coordinates.latitude !== 'number' || 
+        typeof restaurant.coordinates.longitude !== 'number') {
+      errors.push(`Restaurant at index ${index}: valid coordinates (latitude and longitude) are required`);
+    }
+    if (!restaurant.address) {
+      errors.push(`Restaurant at index ${index}: address is required`);
+    }
+    if (typeof restaurant.reviews !== 'number') {
+      errors.push(`Restaurant at index ${index}: reviews must be a number`);
+    }
+    if (typeof restaurant.rating !== 'number') {
+      errors.push(`Restaurant at index ${index}: rating must be a number`);
+    }
+    if (!restaurant.link) {
+      errors.push(`Restaurant at index ${index}: link is required`);
+    }
+    if (!Array.isArray(restaurant.about)) {
+      errors.push(`Restaurant at index ${index}: about must be an array`);
+    }
+  });
+
+  return {
+    valid: errors.length === 0,
+    errors: errors.length > 0 ? errors : undefined,
+  };
+};
+
 export const validateSearchParams = (data: any): ValidationResult => {
   const errors: string[] = [];
 

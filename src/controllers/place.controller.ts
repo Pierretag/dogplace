@@ -1,7 +1,7 @@
 import { Context } from 'koa';
 import { Pool } from 'pg';
 import * as placeLogic from '../logic/place.logic';
-import { CreatePlaceInput, UpdatePlaceInput } from '../types/place.types';
+import { CreatePlaceInput, UpdatePlaceInput, RestaurantData } from '../types/place.types';
 import { parsePaginationParams } from '../utils/pagination';
 import { logger } from '../utils/logger';
 import { notFound, badRequest } from '../middleware/error.middleware';
@@ -136,6 +136,86 @@ export const searchPlaces = async (ctx: Context): Promise<void> => {
     ctx.body = result;
   } catch (error) {
     logger.error('Error searching places', { error, query: ctx.query });
+    throw error;
+  }
+};
+
+/**
+ * Bulk import restaurants
+ * @param ctx Koa context
+ */
+export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
+  try {
+    const { restaurants } = ctx.request.body as { restaurants: RestaurantData[] };
+    const pool = getPool(ctx);
+    
+    let created = 0;
+    let updated = 0;
+    let failed = 0;
+    const errors: Array<{ restaurant: string; error: string }> = [];
+
+    for (const restaurant of restaurants) {
+      try {
+        // Check if restaurant exists
+        const existingPlaces = await placeLogic.searchPlaces(pool, {
+          map_place_id: restaurant.place_id,
+        }, { page: 1, limit: 1 });
+
+        const exists = existingPlaces.data.length > 0;
+
+        if (exists) {
+          // Update existing restaurant
+          const existingPlace = existingPlaces.data[0];
+          await placeLogic.updatePlace(pool, existingPlace.id, {
+            map_nbreviews: restaurant.reviews,
+            map_rating: restaurant.rating,
+            pet_classification: placeLogic.extractPetPolicy(restaurant),
+          });
+          updated++;
+          logger.info('Updated restaurant', { name: restaurant.name });
+        } else {
+          // Create new restaurant
+          const input: CreatePlaceInput = {
+            name: restaurant.name,
+            address: restaurant.address,
+            category: 'restaurant',
+            sub_category: 'restaurant',
+            pet_classification: placeLogic.extractPetPolicy(restaurant),
+            latitude: restaurant.coordinates.latitude,
+            longitude: restaurant.coordinates.longitude,
+            map_nbreviews: restaurant.reviews,
+            map_rating: restaurant.rating,
+            map_url: restaurant.link,
+            map_place_id: restaurant.place_id,
+          };
+
+          await placeLogic.createPlace(pool, input);
+          created++;
+          logger.info('Created restaurant', { name: restaurant.name });
+        }
+      } catch (error) {
+        logger.error('Error processing restaurant', { error, restaurant });
+        failed++;
+        errors.push({
+          restaurant: restaurant.name,
+          error: error instanceof Error ? error.message : 'Unknown error'
+        });
+      }
+    }
+
+    // Return summary
+    ctx.body = {
+      success: true,
+      summary: {
+        total: restaurants.length,
+        created,
+        updated,
+        failed
+      },
+      errors: errors.length > 0 ? errors : undefined
+    };
+  } catch (error) {
+    logger.error('Error in bulk import', { error });
     throw error;
   }
 };

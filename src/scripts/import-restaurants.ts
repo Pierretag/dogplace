@@ -3,8 +3,6 @@ import * as fs from "fs";
 import * as path from "path";
 import {
   CreatePlaceInput,
-  Place,
-  UpdatePlaceInput,
 } from "../types/place.types";
 import { createPlace, searchPlaces, updatePlace } from "../logic/place.logic";
 import { logger } from "../utils/logger";

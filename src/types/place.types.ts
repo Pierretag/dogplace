@@ -40,6 +40,21 @@ export interface CreatePlaceInput {
 /**
  * Input for updating an existing place
  */
+export interface RestaurantData {
+  place_id: string;
+  about: any[];
+  name: string;
+  coordinates: {
+    latitude: number;
+    longitude: number;
+  };
+  description: string;
+  reviews: number;
+  rating: number;
+  link: string;
+  address: string;
+}
+
 export interface UpdatePlaceInput {
   name?: string;
   address?: string;

@@ -2,7 +2,8 @@ import { Pool } from 'pg';
 import { 
   Place, 
   CreatePlaceInput, 
-  UpdatePlaceInput 
+  UpdatePlaceInput,
+  RestaurantData
 } from '../types/place.types';
 import { 
   PaginationParams, 
@@ -208,6 +209,18 @@ export const deletePlace = async (
  * @param pagination Pagination parameters
  * @returns Paginated places
  */
+/**
+ * Extract pet policy from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Pet policy classification
+ */
+export const extractPetPolicy = (restaurant: RestaurantData): string => {
+  const petpolicy = restaurant.about.find((item: { id: string }) => {
+    return item.id === "pets";
+  });
+  return petpolicy ? "dogallowed" : "false";
+};
+
 export const searchPlaces = async (
   pool: Pool,
   filters: Record<string, any>,

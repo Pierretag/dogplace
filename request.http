@@ -8,3 +8,8 @@ GET http://localhost:8000/api/places?limit=100
 ###
 # GET places page 2 
 GET http://localhost:8000/api/places?limit=100&page=2
+
+
+###
+
+GET https://dogplace-8832623530.europe-central2.run.app/api/places
