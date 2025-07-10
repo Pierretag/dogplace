@@ -5,6 +5,7 @@ import {
   CreatePlaceInput,
 } from "../types/place.types";
 import { createPlace, searchPlaces, updatePlace } from "../logic/place.logic";
+import { createRating } from "../db/rating.db";
 import { logger } from "../utils/logger";
 import { pool } from "../config/database";
 
@@ -54,10 +55,18 @@ async function importRestaurants(pool: Pool, filePath: string) {
           // Update existing restaurant
           const existingPlace = existingPlaces.data[0];
           await updatePlace(pool, existingPlace.id, {
-            map_nbreviews: restaurant.reviews,
-            map_rating: restaurant.rating,
             pet_classification: extractPetPolicy(restaurant),
           });
+          
+          // Create/update rating for existing restaurant
+          await createRating(pool, {
+            place_id: existingPlace.id,
+            rating: restaurant.rating,
+            nb_reviews: restaurant.reviews,
+            date: new Date(),
+            source: 'google_maps'
+          });
+          
           updated++;
           logger.info("Updated restaurant", { name: restaurant.name });
         } else {
@@ -70,13 +79,21 @@ async function importRestaurants(pool: Pool, filePath: string) {
             pet_classification: extractPetPolicy(restaurant),
             latitude: restaurant.coordinates.latitude,
             longitude: restaurant.coordinates.longitude,
-            map_nbreviews: restaurant.reviews,
-            map_rating: restaurant.rating,
             map_url: restaurant.link,
             map_place_id: restaurant.place_id,
           };
 
-          await createPlace(pool, input);
+          const newPlace = await createPlace(pool, input);
+          
+          // Create rating for new restaurant
+          await createRating(pool, {
+            place_id: newPlace.id,
+            rating: restaurant.rating,
+            nb_reviews: restaurant.reviews,
+            date: new Date(),
+            source: 'google_maps'
+          });
+          
           created++;
           logger.info("Created restaurant", { name: restaurant.name });
         }
