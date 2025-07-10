@@ -1,5 +1,6 @@
 import Router from '@koa/router';
 import placeRoutes from './place.routes';
+import adminRoutes from './admin.routes';
 
 // Create main router
 const router = new Router();
@@ -13,7 +14,12 @@ router.get('/health', (ctx) => {
 });
 
 // Register routes
+router.use(adminRoutes.routes());
+router.use(adminRoutes.allowedMethods());
+
 router.use(placeRoutes.routes());
 router.use(placeRoutes.allowedMethods());
+
+
 
 export default router;

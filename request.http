@@ -10,6 +10,8 @@ GET http://localhost:8000/api/places?limit=100
 GET http://localhost:8000/api/places?limit=100&page=2
 
 
+### 
+POST http://localhost:8000/api/admin/migrate
 ###
 
 GET https://dogplace-8832623530.europe-central2.run.app/api/places
