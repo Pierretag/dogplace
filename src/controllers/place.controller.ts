@@ -2,6 +2,7 @@ import { Context } from 'koa';
 import { Pool } from 'pg';
 import * as placeLogic from '../logic/place.logic';
 import { CreatePlaceInput, UpdatePlaceInput, RestaurantData } from '../types/place.types';
+import * as ratingDb from '../db/rating.db';
 import { parsePaginationParams } from '../utils/pagination';
 import { logger } from '../utils/logger';
 import { notFound, badRequest } from '../middleware/error.middleware';
@@ -166,10 +167,18 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
         if (exists) {
           // Update existing restaurant
           const existingPlace = existingPlaces.data[0];
+          
+          // Update pet classification if needed
           await placeLogic.updatePlace(pool, existingPlace.id, {
-            map_nbreviews: restaurant.reviews,
-            map_rating: restaurant.rating,
             pet_classification: placeLogic.extractPetPolicy(restaurant),
+          });
+
+          // Create new rating entry
+          await ratingDb.createRating(pool, {
+            place_id: existingPlace.id,
+            rating: restaurant.rating,
+            nb_reviews: restaurant.reviews,
+            date: new Date()
           });
           updated++;
           logger.info('Updated restaurant', { name: restaurant.name });
@@ -183,13 +192,19 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
             pet_classification: placeLogic.extractPetPolicy(restaurant),
             latitude: restaurant.coordinates.latitude,
             longitude: restaurant.coordinates.longitude,
-            map_nbreviews: restaurant.reviews,
-            map_rating: restaurant.rating,
             map_url: restaurant.link,
             map_place_id: restaurant.place_id,
           };
 
-          await placeLogic.createPlace(pool, input);
+          const newPlace = await placeLogic.createPlace(pool, input);
+
+          // Create initial rating entry
+          await ratingDb.createRating(pool, {
+            place_id: newPlace.id,
+            rating: restaurant.rating,
+            nb_reviews: restaurant.reviews,
+            date: new Date()
+          });
           created++;
           logger.info('Created restaurant', { name: restaurant.name });
         }

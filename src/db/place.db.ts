@@ -21,8 +21,6 @@ export const createPlace = async (
     category,
     sub_category,
     pet_classification,
-    map_nbreviews,
-    map_rating,
     map_pricelevel,
     map_url,
     map_place_id,
@@ -34,8 +32,8 @@ export const createPlace = async (
     const result = await pool.query(
       `INSERT INTO places (
         coordinate_id, name, address, category, sub_category, pet_classification,
-        map_nbreviews, map_rating, map_pricelevel, map_url, map_place_id, updated_at, status
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) 
+        map_nbreviews, map_url, map_place_id, updated_at, status
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) 
       RETURNING *`,
       [
         coordinate_id,
@@ -44,8 +42,6 @@ export const createPlace = async (
         category,
         sub_category,
         pet_classification,
-        map_nbreviews,
-        map_rating,
         map_pricelevel,
         map_url,
         map_place_id,
@@ -165,16 +161,6 @@ export const updatePlace = async (
   if (input.pet_classification !== undefined) {
     updates.push(`pet_classification = $${paramIndex++}`);
     values.push(input.pet_classification);
-  }
-  
-  if (input.map_nbreviews !== undefined) {
-    updates.push(`map_nbreviews = $${paramIndex++}`);
-    values.push(input.map_nbreviews);
-  }
-  
-  if (input.map_rating !== undefined) {
-    updates.push(`map_rating = $${paramIndex++}`);
-    values.push(input.map_rating);
   }
   
   if (input.map_pricelevel !== undefined) {

@@ -1,3 +1,5 @@
+import { LatestRating } from './rating.types';
+
 /**
  * Place entity interface
  */
@@ -9,14 +11,19 @@ export interface Place {
   category: string;
   sub_category: string;
   pet_classification: string;
-  map_nbreviews?: number;
-  map_rating?: number;
   map_pricelevel?: number;
   map_url?: string;
   map_place_id?: string;
   created_at: Date;
   updated_at: Date;
   status: 'active' | 'inactive';
+}
+
+/**
+ * Place with latest rating information
+ */
+export interface PlaceWithRating extends Place {
+  latest_rating?: LatestRating;
 }
 
 /**
@@ -30,8 +37,6 @@ export interface CreatePlaceInput {
   pet_classification: string;
   latitude: number;
   longitude: number;
-  map_nbreviews?: number;
-  map_rating?: number;
   map_pricelevel?: number;
   map_url?: string;
   map_place_id?: string;
@@ -63,8 +68,6 @@ export interface UpdatePlaceInput {
   pet_classification?: string;
   latitude?: number;
   longitude?: number;
-  map_nbreviews?: number;
-  map_rating?: number;
   map_pricelevel?: number;
   map_url?: string;
   map_place_id?: string;

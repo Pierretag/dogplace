@@ -3,8 +3,10 @@ import {
   Place, 
   CreatePlaceInput, 
   UpdatePlaceInput,
-  RestaurantData
+  RestaurantData,
+  PlaceWithRating
 } from '../types/place.types';
+import * as ratingDb from '../db/rating.db';
 import { 
   PaginationParams, 
   PaginatedResult 
@@ -43,8 +45,6 @@ export const createPlace = async (
       category: input.category,
       sub_category: input.sub_category,
       pet_classification: input.pet_classification,
-      map_nbreviews: input.map_nbreviews,
-      map_rating: input.map_rating,
       map_pricelevel: input.map_pricelevel,
       map_url: input.map_url,
       map_place_id: input.map_place_id,
@@ -78,8 +78,15 @@ export const createPlace = async (
 export const getPlaceById = async (
   pool: Pool,
   id: string
-): Promise<Place | null> => {
-  return placeDb.getPlaceById(pool, id);
+): Promise<PlaceWithRating | null> => {
+  const place = await placeDb.getPlaceById(pool, id);
+  if (!place) return null;
+
+  const latestRating = await ratingDb.getLatestRating(pool, id);
+  return {
+    ...place,
+    latest_rating: latestRating || undefined
+  };
 };
 
 /**
@@ -91,8 +98,23 @@ export const getPlaceById = async (
 export const getPlaces = async (
   pool: Pool,
   pagination: PaginationParams
-): Promise<PaginatedResult<Place>> => {
-  return placeDb.getPlaces(pool, pagination);
+): Promise<PaginatedResult<PlaceWithRating>> => {
+  const places = await placeDb.getPlaces(pool, pagination);
+  
+  // Get latest ratings for all places
+  const placeIds = places.data.map(place => place.id);
+  const ratingsMap = await ratingDb.getLatestRatingsForPlaces(pool, placeIds);
+  
+  // Add ratings to places
+  const placesWithRatings = places.data.map(place => ({
+    ...place,
+    latest_rating: ratingsMap.get(place.id)
+  }));
+  
+  return {
+    ...places,
+    data: placesWithRatings
+  };
 };
 
 /**
@@ -225,6 +247,21 @@ export const searchPlaces = async (
   pool: Pool,
   filters: Record<string, any>,
   pagination: PaginationParams
-): Promise<PaginatedResult<Place>> => {
-  return placeDb.searchPlaces(pool, filters, pagination);
+): Promise<PaginatedResult<PlaceWithRating>> => {
+  const places = await placeDb.searchPlaces(pool, filters, pagination);
+  
+  // Get latest ratings for all places
+  const placeIds = places.data.map(place => place.id);
+  const ratingsMap = await ratingDb.getLatestRatingsForPlaces(pool, placeIds);
+  
+  // Add ratings to places
+  const placesWithRatings = places.data.map(place => ({
+    ...place,
+    latest_rating: ratingsMap.get(place.id)
+  }));
+  
+  return {
+    ...places,
+    data: placesWithRatings
+  };
 };
