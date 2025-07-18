@@ -88,6 +88,8 @@ npm start
 - `PUT /api/places/:id` - Update a place
 - `DELETE /api/places/:id` - Delete a place
 - `GET /api/places/search` - Search places by various criteria
+- `POST /api/places/bulk-import` - Bulk import restaurants from JSON data
+- `POST /api/places/file-import` - Import restaurants from a JSON file upload
 
 ### Health Check
 

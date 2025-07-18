@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored restaurant import functionality to extract common logic into a reusable function
 - Enhanced file import endpoint to fully process restaurant data from uploaded JSON files
 - Improved error handling for file uploads and JSON parsing
+- Removed import-restaurants.ts script in favor of the file import API endpoint
 
 ## [1.1.0] - 2025-07-17
 

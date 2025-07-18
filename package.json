@@ -17,8 +17,7 @@
     "test:coverage": "jest --coverage",
     "prettier": "npx prettier --write .",
     "migrate": "ts-node src/db/migrations/run-migrations.ts",
-    "migrate:dev": "ts-node src/db/migrations/run-migrations.ts && npm run dev",
-    "import-restaurants": "ts-node src/scripts/import-restaurants.ts"
+    "migrate:dev": "ts-node src/db/migrations/run-migrations.ts && npm run dev"
   },
   "keywords": [],
   "author": "",
