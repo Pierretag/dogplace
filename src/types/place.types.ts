@@ -12,6 +12,8 @@ export interface Place {
   sub_category: string;
   pet_classification: string;
   map_pricelevel?: number;
+  map_hours?: string | {};
+  map_pricerange?: string;
   map_url?: string;
   map_place_id?: string;
   created_at: Date;
@@ -22,8 +24,9 @@ export interface Place {
 /**
  * Place with latest rating information
  */
-export interface PlaceWithRating extends Place {
+export interface PlaceOutput extends Place {
   latest_rating?: LatestRating;
+  map_hours: {},
 }
 
 /**
@@ -38,6 +41,8 @@ export interface CreatePlaceInput {
   latitude: number;
   longitude: number;
   map_pricelevel?: number;
+  map_hours?: string;
+  map_pricerange?: string;
   map_url?: string;
   map_place_id?: string;
 }
@@ -58,6 +63,22 @@ export interface RestaurantData {
   rating: number;
   link: string;
   address: string;
+  hours?: {
+    day: string;
+    times: string[];
+  }[];
+  price_range?: string;
+  category?: string;
+  sub_category?: string;
+  pet_classification?: string;
+  latitude?: number;
+  longitude?: number;
+  map_pricelevel?: number;
+  map_hours?: string;
+  map_pricerange?: string;
+  map_url?: string;
+  map_place_id?: string;
+  status?: 'active' | 'inactive';
 }
 
 export interface UpdatePlaceInput {
@@ -70,6 +91,8 @@ export interface UpdatePlaceInput {
   longitude?: number;
   map_pricelevel?: number;
   map_url?: string;
+  map_hours?: string;
+  map_pricerange?: string;
   map_place_id?: string;
   status?: 'active' | 'inactive';
 }

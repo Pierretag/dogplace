@@ -4,7 +4,7 @@ import * as path from "path";
 import {
   CreatePlaceInput,
 } from "../types/place.types";
-import { createPlace, searchPlaces, updatePlace } from "../logic/place.logic";
+import { createPlace, searchPlaces, updatePlace, extractPetPolicy, extractHours, extractPriceRange } from "../logic/place.logic";
 import { createRating } from "../db/rating.db";
 import { logger } from "../utils/logger";
 import { pool } from "../config/database";
@@ -24,14 +24,6 @@ interface RestaurantData {
   address: string;
 }
 
-function extractPetPolicy(restaurant: RestaurantData): string {
-  const petpolicy = restaurant.about.find((item: { id: string }) => {
-    return item.id === "pets";
-  });
-  if (petpolicy) {
-    return "dogallowed";
-  } else return "false";
-}
 
 async function importRestaurants(pool: Pool, filePath: string) {
   try {
@@ -56,6 +48,8 @@ async function importRestaurants(pool: Pool, filePath: string) {
           const existingPlace = existingPlaces.data[0];
           await updatePlace(pool, existingPlace.id, {
             pet_classification: extractPetPolicy(restaurant),
+            map_hours: extractHours(restaurant),
+            map_pricerange: extractPriceRange(restaurant),
           });
           
           // Create/update rating for existing restaurant
@@ -79,6 +73,8 @@ async function importRestaurants(pool: Pool, filePath: string) {
             pet_classification: extractPetPolicy(restaurant),
             latitude: restaurant.coordinates.latitude,
             longitude: restaurant.coordinates.longitude,
+            map_hours: extractHours(restaurant),
+            map_pricerange: extractPriceRange(restaurant),
             map_url: restaurant.link,
             map_place_id: restaurant.place_id,
           };
@@ -119,7 +115,7 @@ async function importRestaurants(pool: Pool, filePath: string) {
 // Main execution
 //if (require.main === module) {
 try {
-  const filePath = "./file/all-task-5.json";
+  const filePath = "./file/20250717.json";
 
   importRestaurants(pool, filePath)
     .then(() => process.exit(0))

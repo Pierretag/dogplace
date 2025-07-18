@@ -1,6 +1,7 @@
 import { Context } from 'koa';
 import { Pool } from 'pg';
 import * as placeLogic from '../logic/place.logic';
+import { extractPetPolicy, extractHours, extractPriceRange } from '../logic/place.logic';
 import { CreatePlaceInput, UpdatePlaceInput, RestaurantData } from '../types/place.types';
 import * as ratingDb from '../db/rating.db';
 import { parsePaginationParams } from '../utils/pagination';
@@ -168,9 +169,11 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
           // Update existing restaurant
           const existingPlace = existingPlaces.data[0];
           
-          // Update pet classification if needed
+          // Update pet classification, hours, and price range if needed
           await placeLogic.updatePlace(pool, existingPlace.id, {
-            pet_classification: placeLogic.extractPetPolicy(restaurant),
+            pet_classification: extractPetPolicy(restaurant),
+            map_hours: extractHours(restaurant),
+            map_pricerange: extractPriceRange(restaurant),
           });
 
           // Create new rating entry
@@ -189,9 +192,11 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
             address: restaurant.address,
             category: 'restaurant',
             sub_category: 'restaurant',
-            pet_classification: placeLogic.extractPetPolicy(restaurant),
+            pet_classification: extractPetPolicy(restaurant),
             latitude: restaurant.coordinates.latitude,
             longitude: restaurant.coordinates.longitude,
+            map_hours: extractHours(restaurant),
+            map_pricerange: extractPriceRange(restaurant),
             map_url: restaurant.link,
             map_place_id: restaurant.place_id,
           };

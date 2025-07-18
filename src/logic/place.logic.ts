@@ -4,7 +4,7 @@ import {
   CreatePlaceInput, 
   UpdatePlaceInput,
   RestaurantData,
-  PlaceWithRating
+  PlaceOutput
 } from '../types/place.types';
 import * as ratingDb from '../db/rating.db';
 import { 
@@ -46,6 +46,8 @@ export const createPlace = async (
       sub_category: input.sub_category,
       pet_classification: input.pet_classification,
       map_pricelevel: input.map_pricelevel,
+      map_hours: input.map_hours,
+      map_pricerange: input.map_pricerange,
       map_url: input.map_url,
       map_place_id: input.map_place_id,
       updated_at: new Date(),
@@ -78,14 +80,15 @@ export const createPlace = async (
 export const getPlaceById = async (
   pool: Pool,
   id: string
-): Promise<PlaceWithRating | null> => {
+): Promise<PlaceOutput | null> => {
   const place = await placeDb.getPlaceById(pool, id);
   if (!place) return null;
 
   const latestRating = await ratingDb.getLatestRating(pool, id);
   return {
     ...place,
-    latest_rating: latestRating || undefined
+    latest_rating: latestRating || undefined,
+    map_hours: JSON.stringify(place.map_hours) || {},
   };
 };
 
@@ -98,7 +101,7 @@ export const getPlaceById = async (
 export const getPlaces = async (
   pool: Pool,
   pagination: PaginationParams
-): Promise<PaginatedResult<PlaceWithRating>> => {
+): Promise<PaginatedResult<PlaceOutput>> => {
   const places = await placeDb.getPlaces(pool, pagination);
   
   // Get latest ratings for all places
@@ -106,8 +109,9 @@ export const getPlaces = async (
   const ratingsMap = await ratingDb.getLatestRatingsForPlaces(pool, placeIds);
   
   // Add ratings to places
-  const placesWithRatings = places.data.map(place => ({
+  const placesWithRatings :PlaceOutput[] = places.data.map(place => ({
     ...place,
+    map_hours: place.map_hours ? JSON.parse(place.map_hours as string).hours : {},
     latest_rating: ratingsMap.get(place.id)
   }));
   
@@ -243,11 +247,33 @@ export const extractPetPolicy = (restaurant: RestaurantData): string => {
   return petpolicy ? "dogallowed" : "false";
 };
 
+/**
+ * Extract hours data from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Hours data as JSON string or undefined if not available
+ */
+export const extractHours = (restaurant: RestaurantData): string | undefined => {
+  if (!restaurant.hours || restaurant.hours.length === 0) {
+    return undefined;
+  }
+  
+  return JSON.stringify({ hours: restaurant.hours });
+};
+
+/**
+ * Extract price range from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Price range or undefined if not available
+ */
+export const extractPriceRange = (restaurant: RestaurantData): string | undefined => {
+  return restaurant.price_range || undefined;
+};
+
 export const searchPlaces = async (
   pool: Pool,
   filters: Record<string, any>,
   pagination: PaginationParams
-): Promise<PaginatedResult<PlaceWithRating>> => {
+): Promise<PaginatedResult<PlaceOutput>> => {
   const places = await placeDb.searchPlaces(pool, filters, pagination);
   
   // Get latest ratings for all places
@@ -255,9 +281,10 @@ export const searchPlaces = async (
   const ratingsMap = await ratingDb.getLatestRatingsForPlaces(pool, placeIds);
   
   // Add ratings to places
-  const placesWithRatings = places.data.map(place => ({
+  const placesWithRatings :PlaceOutput[] = places.data.map(place => ({
     ...place,
-    latest_rating: ratingsMap.get(place.id)
+    latest_rating: ratingsMap.get(place.id),
+    map_hours: place.map_hours ? JSON.parse(place.map_hours as string): {},
   }));
   
   return {
