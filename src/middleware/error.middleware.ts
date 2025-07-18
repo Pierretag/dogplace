@@ -1,18 +1,21 @@
-import { Context, Next } from 'koa';
-import { logger } from '../utils/logger';
-import { ErrorResponse } from '../types/common.types';
+import { Context, Next } from "koa";
+import { logger } from "../utils/logger";
+import { ErrorResponse } from "../types/common.types";
 
 /**
  * Error handling middleware
  * @param ctx Koa context
  * @param next Next middleware
  */
-export const errorMiddleware = async (ctx: Context, next: Next): Promise<void> => {
+export const errorMiddleware = async (
+  ctx: Context,
+  next: Next,
+): Promise<void> => {
   try {
     await next();
   } catch (error: any) {
     // Log the error
-    logger.error('Request error', {
+    logger.error("Request error", {
       error: error.message,
       stack: error.stack,
       path: ctx.path,
@@ -24,7 +27,7 @@ export const errorMiddleware = async (ctx: Context, next: Next): Promise<void> =
 
     // Create the error response
     const errorResponse: ErrorResponse = {
-      error: error.message || 'Internal Server Error',
+      error: error.message || "Internal Server Error",
       status: ctx.status,
     };
 
@@ -39,7 +42,7 @@ export const errorMiddleware = async (ctx: Context, next: Next): Promise<void> =
     ctx.body = errorResponse;
 
     // Emit the error event
-    ctx.app.emit('error', error, ctx);
+    ctx.app.emit("error", error, ctx);
   }
 };
 
@@ -70,7 +73,7 @@ export class ApiError extends Error {
  * @param message Error message
  * @returns API error
  */
-export const notFound = (message: string = 'Resource not found'): ApiError => {
+export const notFound = (message: string = "Resource not found"): ApiError => {
   return new ApiError(message, 404);
 };
 
@@ -80,7 +83,10 @@ export const notFound = (message: string = 'Resource not found'): ApiError => {
  * @param details Error details
  * @returns API error
  */
-export const badRequest = (message: string = 'Bad request', details?: string[]): ApiError => {
+export const badRequest = (
+  message: string = "Bad request",
+  details?: string[],
+): ApiError => {
   return new ApiError(message, 400, details);
 };
 
@@ -89,7 +95,7 @@ export const badRequest = (message: string = 'Bad request', details?: string[]):
  * @param message Error message
  * @returns API error
  */
-export const unauthorized = (message: string = 'Unauthorized'): ApiError => {
+export const unauthorized = (message: string = "Unauthorized"): ApiError => {
   return new ApiError(message, 401);
 };
 
@@ -98,7 +104,7 @@ export const unauthorized = (message: string = 'Unauthorized'): ApiError => {
  * @param message Error message
  * @returns API error
  */
-export const forbidden = (message: string = 'Forbidden'): ApiError => {
+export const forbidden = (message: string = "Forbidden"): ApiError => {
   return new ApiError(message, 403);
 };
 
@@ -107,6 +113,8 @@ export const forbidden = (message: string = 'Forbidden'): ApiError => {
  * @param message Error message
  * @returns API error
  */
-export const internalServerError = (message: string = 'Internal server error'): ApiError => {
+export const internalServerError = (
+  message: string = "Internal server error",
+): ApiError => {
   return new ApiError(message, 500);
 };

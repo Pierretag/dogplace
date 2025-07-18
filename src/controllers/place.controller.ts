@@ -1,12 +1,20 @@
-import { Context } from 'koa';
-import { Pool } from 'pg';
-import * as placeLogic from '../logic/place.logic';
-import { extractPetPolicy, extractHours, extractPriceRange } from '../logic/place.logic';
-import { CreatePlaceInput, UpdatePlaceInput, RestaurantData } from '../types/place.types';
-import * as ratingDb from '../db/rating.db';
-import { parsePaginationParams } from '../utils/pagination';
-import { logger } from '../utils/logger';
-import { notFound, badRequest } from '../middleware/error.middleware';
+import { Context } from "koa";
+import { Pool } from "pg";
+import * as placeLogic from "../logic/place.logic";
+import {
+  extractPetPolicy,
+  extractHours,
+  extractPriceRange,
+} from "../logic/place.logic";
+import {
+  CreatePlaceInput,
+  UpdatePlaceInput,
+  RestaurantData,
+} from "../types/place.types";
+import * as ratingDb from "../db/rating.db";
+import { parsePaginationParams } from "../utils/pagination";
+import { logger } from "../utils/logger";
+import { notFound, badRequest } from "../middleware/error.middleware";
 
 /**
  * Get database pool from context
@@ -23,13 +31,13 @@ export const getPlaces = async (ctx: Context): Promise<void> => {
   try {
     // Parse pagination parameters
     const pagination = parsePaginationParams(ctx.query);
-    
+
     // Get places
     const result = await placeLogic.getPlaces(getPool(ctx), pagination);
-    
+
     ctx.body = result;
   } catch (error) {
-    logger.error('Error getting places', { error });
+    logger.error("Error getting places", { error });
     throw error;
   }
 };
@@ -41,17 +49,17 @@ export const getPlaces = async (ctx: Context): Promise<void> => {
 export const getPlaceById = async (ctx: Context): Promise<void> => {
   try {
     const id = ctx.params.id;
-    
+
     // Get place
     const place = await placeLogic.getPlaceById(getPool(ctx), id);
-    
+
     if (!place) {
       throw notFound(`Place with ID ${id} not found`);
     }
-    
+
     ctx.body = place;
   } catch (error) {
-    logger.error('Error getting place by ID', { error, id: ctx.params.id });
+    logger.error("Error getting place by ID", { error, id: ctx.params.id });
     throw error;
   }
 };
@@ -63,14 +71,14 @@ export const getPlaceById = async (ctx: Context): Promise<void> => {
 export const createPlace = async (ctx: Context): Promise<void> => {
   try {
     const input = ctx.request.body as CreatePlaceInput;
-    
+
     // Create place
     const place = await placeLogic.createPlace(getPool(ctx), input);
-    
+
     ctx.status = 201;
     ctx.body = place;
   } catch (error) {
-    logger.error('Error creating place', { error, input: ctx.request.body });
+    logger.error("Error creating place", { error, input: ctx.request.body });
     throw error;
   }
 };
@@ -83,17 +91,21 @@ export const updatePlace = async (ctx: Context): Promise<void> => {
   try {
     const id = ctx.params.id;
     const input = ctx.request.body as UpdatePlaceInput;
-    
+
     // Update place
     const place = await placeLogic.updatePlace(getPool(ctx), id, input);
-    
+
     if (!place) {
       throw notFound(`Place with ID ${id} not found`);
     }
-    
+
     ctx.body = place;
   } catch (error) {
-    logger.error('Error updating place', { error, id: ctx.params.id, input: ctx.request.body });
+    logger.error("Error updating place", {
+      error,
+      id: ctx.params.id,
+      input: ctx.request.body,
+    });
     throw error;
   }
 };
@@ -105,17 +117,17 @@ export const updatePlace = async (ctx: Context): Promise<void> => {
 export const deletePlace = async (ctx: Context): Promise<void> => {
   try {
     const id = ctx.params.id;
-    
+
     // Delete place
     const deleted = await placeLogic.deletePlace(getPool(ctx), id);
-    
+
     if (!deleted) {
       throw notFound(`Place with ID ${id} not found`);
     }
-    
+
     ctx.status = 204;
   } catch (error) {
-    logger.error('Error deleting place', { error, id: ctx.params.id });
+    logger.error("Error deleting place", { error, id: ctx.params.id });
     throw error;
   }
 };
@@ -128,16 +140,20 @@ export const searchPlaces = async (ctx: Context): Promise<void> => {
   try {
     // Parse pagination parameters
     const pagination = parsePaginationParams(ctx.query);
-    
+
     // Extract search filters from query parameters
     const { page, limit, ...filters } = ctx.query;
-    
+
     // Search places
-    const result = await placeLogic.searchPlaces(getPool(ctx), filters, pagination);
-    
+    const result = await placeLogic.searchPlaces(
+      getPool(ctx),
+      filters,
+      pagination,
+    );
+
     ctx.body = result;
   } catch (error) {
-    logger.error('Error searching places', { error, query: ctx.query });
+    logger.error("Error searching places", { error, query: ctx.query });
     throw error;
   }
 };
@@ -148,9 +164,11 @@ export const searchPlaces = async (ctx: Context): Promise<void> => {
  */
 export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
   try {
-    const { restaurants } = ctx.request.body as { restaurants: RestaurantData[] };
+    const { restaurants } = ctx.request.body as {
+      restaurants: RestaurantData[];
+    };
     const pool = getPool(ctx);
-    
+
     let created = 0;
     let updated = 0;
     let failed = 0;
@@ -159,16 +177,20 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
     for (const restaurant of restaurants) {
       try {
         // Check if restaurant exists
-        const existingPlaces = await placeLogic.searchPlaces(pool, {
-          map_place_id: restaurant.place_id,
-        }, { page: 1, limit: 1 });
+        const existingPlaces = await placeLogic.searchPlaces(
+          pool,
+          {
+            map_place_id: restaurant.place_id,
+          },
+          { page: 1, limit: 1 },
+        );
 
         const exists = existingPlaces.data.length > 0;
 
         if (exists) {
           // Update existing restaurant
           const existingPlace = existingPlaces.data[0];
-          
+
           // Update pet classification, hours, and price range if needed
           await placeLogic.updatePlace(pool, existingPlace.id, {
             pet_classification: extractPetPolicy(restaurant),
@@ -181,17 +203,17 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
             place_id: existingPlace.id,
             rating: restaurant.rating,
             nb_reviews: restaurant.reviews,
-            date: new Date()
+            date: new Date(),
           });
           updated++;
-          logger.info('Updated restaurant', { name: restaurant.name });
+          logger.info("Updated restaurant", { name: restaurant.name });
         } else {
           // Create new restaurant
           const input: CreatePlaceInput = {
             name: restaurant.name,
             address: restaurant.address,
-            category: 'restaurant',
-            sub_category: 'restaurant',
+            category: "restaurant",
+            sub_category: "restaurant",
             pet_classification: extractPetPolicy(restaurant),
             latitude: restaurant.coordinates.latitude,
             longitude: restaurant.coordinates.longitude,
@@ -208,17 +230,17 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
             place_id: newPlace.id,
             rating: restaurant.rating,
             nb_reviews: restaurant.reviews,
-            date: new Date()
+            date: new Date(),
           });
           created++;
-          logger.info('Created restaurant', { name: restaurant.name });
+          logger.info("Created restaurant", { name: restaurant.name });
         }
       } catch (error) {
-        logger.error('Error processing restaurant', { error, restaurant });
+        logger.error("Error processing restaurant", { error, restaurant });
         failed++;
         errors.push({
           restaurant: restaurant.name,
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : "Unknown error",
         });
       }
     }
@@ -230,12 +252,12 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
         total: restaurants.length,
         created,
         updated,
-        failed
+        failed,
       },
-      errors: errors.length > 0 ? errors : undefined
+      errors: errors.length > 0 ? errors : undefined,
     };
   } catch (error) {
-    logger.error('Error in bulk import', { error });
+    logger.error("Error in bulk import", { error });
     throw error;
   }
 };

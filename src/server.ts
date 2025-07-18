@@ -1,12 +1,12 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-import logger from 'koa-logger';
-import cors from '@koa/cors';
-import { config } from './config/environment';
-import { pool } from './config/database';
-import { errorMiddleware } from './middleware/error.middleware';
-import router from './routes';
-import { logger as appLogger } from './utils/logger';
+import Koa from "koa";
+import bodyParser from "koa-bodyparser";
+import logger from "koa-logger";
+import cors from "@koa/cors";
+import { config } from "./config/environment";
+import { pool } from "./config/database";
+import { errorMiddleware } from "./middleware/error.middleware";
+import router from "./routes";
+import { logger as appLogger } from "./utils/logger";
 
 // Create Koa application
 const app = new Koa();
@@ -34,17 +34,17 @@ const server = app.listen(config.port, () => {
 });
 
 // Handle server errors
-server.on('error', (err) => {
-  appLogger.error('Server error', { error: err });
+server.on("error", (err) => {
+  appLogger.error("Server error", { error: err });
 });
 
 // Handle process termination
-process.on('SIGINT', () => {
-  appLogger.info('Shutting down server');
+process.on("SIGINT", () => {
+  appLogger.info("Shutting down server");
   server.close(() => {
-    appLogger.info('Server closed');
+    appLogger.info("Server closed");
     pool.end(() => {
-      appLogger.info('Database pool closed');
+      appLogger.info("Database pool closed");
       process.exit(0);
     });
   });

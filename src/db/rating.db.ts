@@ -1,6 +1,6 @@
-import { Pool, PoolClient } from 'pg';
-import { Rating, CreateRatingInput, LatestRating } from '../types/rating.types';
-import { logger } from '../utils/logger';
+import { Pool, PoolClient } from "pg";
+import { Rating, CreateRatingInput, LatestRating } from "../types/rating.types";
+import { logger } from "../utils/logger";
 
 /**
  * Create a new rating
@@ -10,28 +10,28 @@ import { logger } from '../utils/logger';
  */
 export const createRating = async (
   pool: Pool | PoolClient,
-  input: CreateRatingInput
+  input: CreateRatingInput,
 ): Promise<Rating> => {
   const {
     place_id,
     rating,
     nb_reviews,
     date = new Date(),
-    source = 'google_maps',
+    source = "google_maps",
   } = input;
-  
+
   try {
     const result = await pool.query(
       `INSERT INTO ratings (
         place_id, rating, nb_reviews, date, source
       ) VALUES ($1, $2, $3, $4, $5) 
       RETURNING *`,
-      [place_id, rating, nb_reviews, date, source]
+      [place_id, rating, nb_reviews, date, source],
     );
-    
+
     return result.rows[0];
   } catch (error) {
-    logger.error('Error creating rating', { error, input });
+    logger.error("Error creating rating", { error, input });
     throw error;
   }
 };
@@ -44,7 +44,7 @@ export const createRating = async (
  */
 export const getLatestRating = async (
   pool: Pool | PoolClient,
-  placeId: string
+  placeId: string,
 ): Promise<LatestRating | null> => {
   try {
     const result = await pool.query(
@@ -53,12 +53,12 @@ export const getLatestRating = async (
        WHERE place_id = $1
        ORDER BY date DESC
        LIMIT 1`,
-      [placeId]
+      [placeId],
     );
-    
+
     return result.rows[0] || null;
   } catch (error) {
-    logger.error('Error getting latest rating', { error, placeId });
+    logger.error("Error getting latest rating", { error, placeId });
     throw error;
   }
 };
@@ -71,7 +71,7 @@ export const getLatestRating = async (
  */
 export const getRatingsForPlace = async (
   pool: Pool | PoolClient,
-  placeId: string
+  placeId: string,
 ): Promise<Rating[]> => {
   try {
     const result = await pool.query(
@@ -79,12 +79,12 @@ export const getRatingsForPlace = async (
        FROM ratings
        WHERE place_id = $1
        ORDER BY date DESC`,
-      [placeId]
+      [placeId],
     );
-    
+
     return result.rows;
   } catch (error) {
-    logger.error('Error getting ratings for place', { error, placeId });
+    logger.error("Error getting ratings for place", { error, placeId });
     throw error;
   }
 };
@@ -97,7 +97,7 @@ export const getRatingsForPlace = async (
  */
 export const getLatestRatingsForPlaces = async (
   pool: Pool | PoolClient,
-  placeIds: string[]
+  placeIds: string[],
 ): Promise<Map<string, LatestRating>> => {
   try {
     const result = await pool.query(
@@ -112,21 +112,24 @@ export const getLatestRatingsForPlaces = async (
         ORDER BY place_id, date DESC
       )
       SELECT * FROM LatestRatings`,
-      [placeIds]
+      [placeIds],
     );
-    
+
     const ratingsMap = new Map<string, LatestRating>();
-    result.rows.forEach(row => {
+    result.rows.forEach((row) => {
       ratingsMap.set(row.place_id, {
         rating: row.rating,
         nb_reviews: row.nb_reviews,
-        date: row.date
+        date: row.date,
       });
     });
-    
+
     return ratingsMap;
   } catch (error) {
-    logger.error('Error getting latest ratings for places', { error, placeIds });
+    logger.error("Error getting latest ratings for places", {
+      error,
+      placeIds,
+    });
     throw error;
   }
 };

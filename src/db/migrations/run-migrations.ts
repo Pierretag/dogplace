@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { Pool } from 'pg';
-import { config } from '../../config/environment';
-import { logger } from '../../utils/logger';
+import fs from "fs";
+import path from "path";
+import { Pool } from "pg";
+import { config } from "../../config/environment";
+import { logger } from "../../utils/logger";
 
 /**
  * Run database migrations
@@ -25,7 +25,7 @@ async function runMigrations(): Promise<void> {
 
     // Get applied migrations
     const { rows: appliedMigrations } = await pool.query(
-      'SELECT name FROM migrations ORDER BY id'
+      "SELECT name FROM migrations ORDER BY id",
     );
     const appliedMigrationNames = appliedMigrations.map((m) => m.name);
 
@@ -33,7 +33,7 @@ async function runMigrations(): Promise<void> {
     const migrationsDir = path.join(__dirname);
     const migrationFiles = fs
       .readdirSync(migrationsDir)
-      .filter((file) => file.endsWith('.sql'))
+      .filter((file) => file.endsWith(".sql"))
       .sort();
 
     // Apply migrations
@@ -48,22 +48,22 @@ async function runMigrations(): Promise<void> {
       // Start a transaction
       const client = await pool.connect();
       try {
-        await client.query('BEGIN');
+        await client.query("BEGIN");
 
         // Read and execute migration
-        const migration = fs.readFileSync(path.join(migrationsDir, file), 'utf8');
+        const migration = fs.readFileSync(
+          path.join(migrationsDir, file),
+          "utf8",
+        );
         await client.query(migration);
 
         // Record migration
-        await client.query(
-          'INSERT INTO migrations (name) VALUES ($1)',
-          [file]
-        );
+        await client.query("INSERT INTO migrations (name) VALUES ($1)", [file]);
 
-        await client.query('COMMIT');
+        await client.query("COMMIT");
         logger.info(`Migration ${file} applied successfully`);
       } catch (error) {
-        await client.query('ROLLBACK');
+        await client.query("ROLLBACK");
         logger.error(`Error applying migration ${file}`, { error });
         throw error;
       } finally {
@@ -71,9 +71,9 @@ async function runMigrations(): Promise<void> {
       }
     }
 
-    logger.info('All migrations applied successfully');
+    logger.info("All migrations applied successfully");
   } catch (error) {
-    logger.error('Error running migrations', { error });
+    logger.error("Error running migrations", { error });
     throw error;
   } finally {
     await pool.end();
@@ -84,11 +84,11 @@ async function runMigrations(): Promise<void> {
 if (require.main === module) {
   runMigrations()
     .then(() => {
-      logger.info('Migrations completed');
+      logger.info("Migrations completed");
       process.exit(0);
     })
     .catch((error) => {
-      logger.error('Migration failed', { error });
+      logger.error("Migration failed", { error });
       process.exit(1);
     });
 }

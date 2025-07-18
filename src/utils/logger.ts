@@ -1,13 +1,13 @@
-import { config } from '../config/environment';
+import { config } from "../config/environment";
 
 /**
  * Log levels
  */
 export enum LogLevel {
-  DEBUG = 'debug',
-  INFO = 'info',
-  WARN = 'warn',
-  ERROR = 'error',
+  DEBUG = "debug",
+  INFO = "info",
+  WARN = "warn",
+  ERROR = "error",
 }
 
 /**
@@ -39,7 +39,7 @@ const shouldLog = (level: LogLevel): boolean => {
  */
 const formatLog = (level: LogLevel, message: string, meta?: any): string => {
   const timestamp = new Date().toISOString();
-  const metaString = meta ? ` ${JSON.stringify(meta)}` : '';
+  const metaString = meta ? ` ${JSON.stringify(meta)}` : "";
   return `[${timestamp}] [${level.toUpperCase()}] ${message}${metaString}`;
 };
 

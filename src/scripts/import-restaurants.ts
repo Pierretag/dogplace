@@ -1,10 +1,15 @@
 import { Pool } from "pg";
 import * as fs from "fs";
 import * as path from "path";
+import { CreatePlaceInput } from "../types/place.types";
 import {
-  CreatePlaceInput,
-} from "../types/place.types";
-import { createPlace, searchPlaces, updatePlace, extractPetPolicy, extractHours, extractPriceRange } from "../logic/place.logic";
+  createPlace,
+  searchPlaces,
+  updatePlace,
+  extractPetPolicy,
+  extractHours,
+  extractPriceRange,
+} from "../logic/place.logic";
 import { createRating } from "../db/rating.db";
 import { logger } from "../utils/logger";
 import { pool } from "../config/database";
@@ -24,7 +29,6 @@ interface RestaurantData {
   address: string;
 }
 
-
 async function importRestaurants(pool: Pool, filePath: string) {
   try {
     // Read and parse the JSON file
@@ -37,9 +41,13 @@ async function importRestaurants(pool: Pool, filePath: string) {
     for (const restaurant of restaurants) {
       try {
         // Check if restaurant exists
-        const existingPlaces = await searchPlaces(pool, {
-          map_place_id: restaurant.place_id,
-        }, { page: 1, limit: 1 });
+        const existingPlaces = await searchPlaces(
+          pool,
+          {
+            map_place_id: restaurant.place_id,
+          },
+          { page: 1, limit: 1 },
+        );
         const exists = existingPlaces.data.length > 0;
         // get pet policy
 
@@ -51,16 +59,16 @@ async function importRestaurants(pool: Pool, filePath: string) {
             map_hours: extractHours(restaurant),
             map_pricerange: extractPriceRange(restaurant),
           });
-          
+
           // Create/update rating for existing restaurant
           await createRating(pool, {
             place_id: existingPlace.id,
             rating: restaurant.rating,
             nb_reviews: restaurant.reviews,
             date: new Date(),
-            source: 'google_maps'
+            source: "google_maps",
           });
-          
+
           updated++;
           logger.info("Updated restaurant", { name: restaurant.name });
         } else {
@@ -80,16 +88,16 @@ async function importRestaurants(pool: Pool, filePath: string) {
           };
 
           const newPlace = await createPlace(pool, input);
-          
+
           // Create rating for new restaurant
           await createRating(pool, {
             place_id: newPlace.id,
             rating: restaurant.rating,
             nb_reviews: restaurant.reviews,
             date: new Date(),
-            source: 'google_maps'
+            source: "google_maps",
           });
-          
+
           created++;
           logger.info("Created restaurant", { name: restaurant.name });
         }

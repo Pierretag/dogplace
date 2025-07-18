@@ -1,6 +1,6 @@
-import { Pool, PoolClient } from 'pg';
-import { Coordinate, CreateCoordinateInput } from '../types/coordinate.types';
-import { logger } from '../utils/logger';
+import { Pool, PoolClient } from "pg";
+import { Coordinate, CreateCoordinateInput } from "../types/coordinate.types";
+import { logger } from "../utils/logger";
 
 /**
  * Create a new coordinate
@@ -10,21 +10,21 @@ import { logger } from '../utils/logger';
  */
 export const createCoordinate = async (
   pool: Pool | PoolClient,
-  input: CreateCoordinateInput
+  input: CreateCoordinateInput,
 ): Promise<Coordinate> => {
   const { latitude, longitude } = input;
-  
+
   try {
     const result = await pool.query(
       `INSERT INTO coordinates (latitude, longitude) 
        VALUES ($1, $2) 
        RETURNING *`,
-      [latitude, longitude]
+      [latitude, longitude],
     );
-    
+
     return result.rows[0];
   } catch (error) {
-    logger.error('Error creating coordinate', { error, input });
+    logger.error("Error creating coordinate", { error, input });
     throw error;
   }
 };
@@ -37,17 +37,16 @@ export const createCoordinate = async (
  */
 export const getCoordinateById = async (
   pool: Pool | PoolClient,
-  id: string
+  id: string,
 ): Promise<Coordinate | null> => {
   try {
-    const result = await pool.query(
-      'SELECT * FROM coordinates WHERE id = $1',
-      [id]
-    );
-    
+    const result = await pool.query("SELECT * FROM coordinates WHERE id = $1", [
+      id,
+    ]);
+
     return result.rows[0] || null;
   } catch (error) {
-    logger.error('Error getting coordinate by ID', { error, id });
+    logger.error("Error getting coordinate by ID", { error, id });
     throw error;
   }
 };
@@ -62,22 +61,22 @@ export const getCoordinateById = async (
 export const updateCoordinate = async (
   pool: Pool | PoolClient,
   id: string,
-  input: CreateCoordinateInput
+  input: CreateCoordinateInput,
 ): Promise<Coordinate | null> => {
   const { latitude, longitude } = input;
-  
+
   try {
     const result = await pool.query(
       `UPDATE coordinates 
        SET latitude = $1, longitude = $2 
        WHERE id = $3 
        RETURNING *`,
-      [latitude, longitude, id]
+      [latitude, longitude, id],
     );
-    
+
     return result.rows[0] || null;
   } catch (error) {
-    logger.error('Error updating coordinate', { error, id, input });
+    logger.error("Error updating coordinate", { error, id, input });
     throw error;
   }
 };
@@ -90,17 +89,17 @@ export const updateCoordinate = async (
  */
 export const deleteCoordinate = async (
   pool: Pool | PoolClient,
-  id: string
+  id: string,
 ): Promise<boolean> => {
   try {
     const result = await pool.query(
-      'DELETE FROM coordinates WHERE id = $1 RETURNING id',
-      [id]
+      "DELETE FROM coordinates WHERE id = $1 RETURNING id",
+      [id],
     );
-    
+
     return result.rowCount !== null && result.rowCount > 0;
   } catch (error) {
-    logger.error('Error deleting coordinate', { error, id });
+    logger.error("Error deleting coordinate", { error, id });
     throw error;
   }
 };

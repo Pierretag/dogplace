@@ -1,5 +1,5 @@
-import { Context, Next } from 'koa';
-import { unauthorized } from './error.middleware';
+import { Context, Next } from "koa";
+import { unauthorized } from "./error.middleware";
 
 /**
  * Authentication middleware
@@ -7,13 +7,16 @@ import { unauthorized } from './error.middleware';
  * @param ctx Koa context
  * @param next Next middleware
  */
-export const authMiddleware = async (ctx: Context, next: Next): Promise<void> => {
+export const authMiddleware = async (
+  ctx: Context,
+  next: Next,
+): Promise<void> => {
   // This is a placeholder for authentication logic
   // In a real application, you would check for a valid token or session
-  
+
   // For now, we'll just pass through all requests
   // You can uncomment the following code to implement authentication
-  
+
   /*
   const token = ctx.headers.authorization?.split(' ')[1];
   
@@ -31,7 +34,7 @@ export const authMiddleware = async (ctx: Context, next: Next): Promise<void> =>
     throw unauthorized('Invalid authentication token');
   }
   */
-  
+
   // Continue to the next middleware
   await next();
 };
@@ -45,10 +48,10 @@ export const authorize = (roles: string[]) => {
   return async (ctx: Context, next: Next): Promise<void> => {
     // This is a placeholder for authorization logic
     // In a real application, you would check if the user has the required role
-    
+
     // For now, we'll just pass through all requests
     // You can uncomment the following code to implement authorization
-    
+
     /*
     const user = ctx.state.user;
     
@@ -60,7 +63,7 @@ export const authorize = (roles: string[]) => {
       throw forbidden('User does not have the required role');
     }
     */
-    
+
     // Continue to the next middleware
     await next();
   };

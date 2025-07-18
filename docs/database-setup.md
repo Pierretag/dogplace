@@ -39,10 +39,12 @@ GRANT ALL PRIVILEGES ON DATABASE dogplace TO dogplace_user;
 \c dogplace
 ```
 
-6. Redo all the configuration just in case 
+6. Redo all the configuration just in case
+
 ```sql
 GRANT ALL PRIVILEGES ON DATABASE dogplace TO dogplace_user;
 ```
+
 ```sql
 CREATE USER dogplace_user WITH ENCRYPTED PASSWORD 'your_password';
 ```
@@ -66,6 +68,7 @@ npm run migrate
 ```
 
 This will:
+
 - Create the necessary tables
 - Set up indexes for performance
 - Create constraints for data integrity
@@ -78,34 +81,34 @@ The database schema consists of the following tables:
 
 Stores location data for places.
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | UUID | Primary key |
-| latitude | DECIMAL(10, 8) | Latitude coordinate |
-| longitude | DECIMAL(11, 8) | Longitude coordinate |
-| created_at | TIMESTAMP | Creation timestamp |
+| Column     | Type           | Description          |
+| ---------- | -------------- | -------------------- |
+| id         | UUID           | Primary key          |
+| latitude   | DECIMAL(10, 8) | Latitude coordinate  |
+| longitude  | DECIMAL(11, 8) | Longitude coordinate |
+| created_at | TIMESTAMP      | Creation timestamp   |
 
 ### places
 
 Stores information about dog-friendly places.
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | UUID | Primary key |
-| coordinate_id | UUID | Foreign key to coordinates table |
-| name | VARCHAR(255) | Place name |
-| address | TEXT | Place address |
-| category | VARCHAR(200) | Main category |
-| sub_category | VARCHAR(200) | Sub-category |
-| pet_classification | VARCHAR(200) | Pet classification |
-| map_nbreviews | INTEGER | Number of reviews from map provider |
-| map_rating | INTEGER | Rating from map provider |
-| map_pricelevel | INTEGER | Price level from map provider |
-| map_url | TEXT | URL to map provider page |
-| map_place_id | TEXT | ID from map provider |
-| created_at | TIMESTAMP | Creation timestamp |
-| updated_at | TIMESTAMP | Last update timestamp |
-| status | VARCHAR(50) | Status (active, inactive) |
+| Column             | Type         | Description                         |
+| ------------------ | ------------ | ----------------------------------- |
+| id                 | UUID         | Primary key                         |
+| coordinate_id      | UUID         | Foreign key to coordinates table    |
+| name               | VARCHAR(255) | Place name                          |
+| address            | TEXT         | Place address                       |
+| category           | VARCHAR(200) | Main category                       |
+| sub_category       | VARCHAR(200) | Sub-category                        |
+| pet_classification | VARCHAR(200) | Pet classification                  |
+| map_nbreviews      | INTEGER      | Number of reviews from map provider |
+| map_rating         | INTEGER      | Rating from map provider            |
+| map_pricelevel     | INTEGER      | Price level from map provider       |
+| map_url            | TEXT         | URL to map provider page            |
+| map_place_id       | TEXT         | ID from map provider                |
+| created_at         | TIMESTAMP    | Creation timestamp                  |
+| updated_at         | TIMESTAMP    | Last update timestamp               |
+| status             | VARCHAR(50)  | Status (active, inactive)           |
 
 ## Indexes
 
@@ -138,3 +141,4 @@ pg_dump -U postgres -d dogplace > dogplace_backup.sql
 
 ```bash
 psql -U postgres -d dogplace < dogplace_backup.sql
+```

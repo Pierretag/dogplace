@@ -1,4 +1,4 @@
-import { PaginationParams, PaginatedResult } from '../types/common.types';
+import { PaginationParams, PaginatedResult } from "../types/common.types";
 
 /**
  * Default pagination values
@@ -16,7 +16,7 @@ export const parsePaginationParams = (query: any): PaginationParams => {
   const page = Math.max(parseInt(query.page as string, 10) || DEFAULT_PAGE, 1);
   const limit = Math.min(
     Math.max(parseInt(query.limit as string, 10) || DEFAULT_LIMIT, 1),
-    MAX_LIMIT
+    MAX_LIMIT,
   );
 
   return { page, limit };
@@ -32,7 +32,7 @@ export const parsePaginationParams = (query: any): PaginationParams => {
 export const calculatePagination = (
   page: number,
   limit: number,
-  total: number
+  total: number,
 ): { offset: number; totalPages: number } => {
   const offset = (page - 1) * limit;
   const totalPages = Math.ceil(total / limit);
@@ -52,7 +52,7 @@ export const createPaginatedResult = <T>(
   data: T[],
   total: number,
   page: number,
-  limit: number
+  limit: number,
 ): PaginatedResult<T> => {
   const { totalPages } = calculatePagination(page, limit, total);
 

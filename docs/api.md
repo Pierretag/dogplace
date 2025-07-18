@@ -301,3 +301,4 @@ Response:
   "status": "ok",
   "timestamp": "2025-05-04T12:00:00Z"
 }
+```

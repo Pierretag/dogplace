@@ -1,4 +1,4 @@
-import { LatestRating } from './rating.types';
+import { LatestRating } from "./rating.types";
 
 /**
  * Place entity interface
@@ -18,7 +18,7 @@ export interface Place {
   map_place_id?: string;
   created_at: Date;
   updated_at: Date;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 }
 
 /**
@@ -26,7 +26,7 @@ export interface Place {
  */
 export interface PlaceOutput extends Place {
   latest_rating?: LatestRating;
-  map_hours: {},
+  map_hours: {};
 }
 
 /**
@@ -78,7 +78,7 @@ export interface RestaurantData {
   map_pricerange?: string;
   map_url?: string;
   map_place_id?: string;
-  status?: 'active' | 'inactive';
+  status?: "active" | "inactive";
 }
 
 export interface UpdatePlaceInput {
@@ -94,5 +94,5 @@ export interface UpdatePlaceInput {
   map_hours?: string;
   map_pricerange?: string;
   map_place_id?: string;
-  status?: 'active' | 'inactive';
+  status?: "active" | "inactive";
 }
