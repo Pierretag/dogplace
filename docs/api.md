@@ -286,6 +286,127 @@ Response:
 }
 ```
 
+#### Bulk Import Places
+
+```
+POST /places/bulk-import
+```
+
+Request Body:
+
+```json
+{
+  "restaurants": [
+    {
+      "place_id": "abc123",
+      "about": [
+        {
+          "id": "pets",
+          "value": "Dog-friendly"
+        }
+      ],
+      "name": "Dog-friendly Cafe",
+      "coordinates": {
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "description": "A dog-friendly cafe",
+      "reviews": 100,
+      "rating": 4.5,
+      "link": "https://maps.example.com/place/123",
+      "address": "123 Main St, City",
+      "hours": [
+        {
+          "day": "Monday",
+          "times": ["12 pm-12 am"]
+        },
+        {
+          "day": "Tuesday",
+          "times": ["12 pm-12 am"]
+        }
+      ],
+      "price_range": "$10-20"
+    }
+  ]
+}
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "summary": {
+    "total": 1,
+    "created": 1,
+    "updated": 0,
+    "failed": 0
+  }
+}
+```
+
+#### File Import Places
+
+```
+POST /places/file-import
+```
+
+Request:
+
+- Content-Type: multipart/form-data
+- Form field: file (JSON file containing an array of restaurant data)
+
+Example JSON file content:
+
+```json
+[
+  {
+    "place_id": "abc123",
+    "about": [
+      {
+        "id": "pets",
+        "value": "Dog-friendly"
+      }
+    ],
+    "name": "Dog-friendly Cafe",
+    "coordinates": {
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "description": "A dog-friendly cafe",
+    "reviews": 100,
+    "rating": 4.5,
+    "link": "https://maps.example.com/place/123",
+    "address": "123 Main St, City",
+    "hours": [
+      {
+        "day": "Monday",
+        "times": ["12 pm-12 am"]
+      },
+      {
+        "day": "Tuesday",
+        "times": ["12 pm-12 am"]
+      }
+    ],
+    "price_range": "$10-20"
+  }
+]
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "summary": {
+    "total": 1,
+    "created": 1,
+    "updated": 0,
+    "failed": 0
+  }
+}
+```
+
 ### Health Check
 
 #### Get API Health

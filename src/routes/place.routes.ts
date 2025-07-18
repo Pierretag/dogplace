@@ -8,6 +8,7 @@ import {
   validateBulkImport,
 } from "../middleware/validation.middleware";
 import { authMiddleware } from "../middleware/auth.middleware";
+import koaBody from "koa-body";
 
 // Create router
 const router = new Router({ prefix: "/api/places" });
@@ -46,6 +47,13 @@ router.post(
   "/bulk-import",
   validate(validateBulkImport),
   placeController.bulkImportPlaces,
+);
+
+// Bulk form file import places
+router.post(
+  "/file-import",
+  koaBody({ encoding: "UTF-8", multipart: true }),
+  placeController.fileImportPlaces,
 );
 
 export default router;

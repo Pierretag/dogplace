@@ -15,7 +15,8 @@ import * as ratingDb from "../db/rating.db";
 import { parsePaginationParams } from "../utils/pagination";
 import { logger } from "../utils/logger";
 import { notFound, badRequest } from "../middleware/error.middleware";
-
+import * as fs from "fs";
+import formidable from "formidable";
 /**
  * Get database pool from context
  * @param ctx Koa context
@@ -169,95 +170,60 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
     };
     const pool = getPool(ctx);
 
-    let created = 0;
-    let updated = 0;
-    let failed = 0;
-    const errors: Array<{ restaurant: string; error: string }> = [];
+    // Process the restaurant import
+    const result = await placeLogic.processRestaurantImport(pool, restaurants);
 
-    for (const restaurant of restaurants) {
-      try {
-        // Check if restaurant exists
-        const existingPlaces = await placeLogic.searchPlaces(
-          pool,
-          {
-            map_place_id: restaurant.place_id,
-          },
-          { page: 1, limit: 1 },
-        );
-
-        const exists = existingPlaces.data.length > 0;
-
-        if (exists) {
-          // Update existing restaurant
-          const existingPlace = existingPlaces.data[0];
-
-          // Update pet classification, hours, and price range if needed
-          await placeLogic.updatePlace(pool, existingPlace.id, {
-            pet_classification: extractPetPolicy(restaurant),
-            map_hours: extractHours(restaurant),
-            map_pricerange: extractPriceRange(restaurant),
-          });
-
-          // Create new rating entry
-          await ratingDb.createRating(pool, {
-            place_id: existingPlace.id,
-            rating: restaurant.rating,
-            nb_reviews: restaurant.reviews,
-            date: new Date(),
-          });
-          updated++;
-          logger.info("Updated restaurant", { name: restaurant.name });
-        } else {
-          // Create new restaurant
-          const input: CreatePlaceInput = {
-            name: restaurant.name,
-            address: restaurant.address,
-            category: "restaurant",
-            sub_category: "restaurant",
-            pet_classification: extractPetPolicy(restaurant),
-            latitude: restaurant.coordinates.latitude,
-            longitude: restaurant.coordinates.longitude,
-            map_hours: extractHours(restaurant),
-            map_pricerange: extractPriceRange(restaurant),
-            map_url: restaurant.link,
-            map_place_id: restaurant.place_id,
-          };
-
-          const newPlace = await placeLogic.createPlace(pool, input);
-
-          // Create initial rating entry
-          await ratingDb.createRating(pool, {
-            place_id: newPlace.id,
-            rating: restaurant.rating,
-            nb_reviews: restaurant.reviews,
-            date: new Date(),
-          });
-          created++;
-          logger.info("Created restaurant", { name: restaurant.name });
-        }
-      } catch (error) {
-        logger.error("Error processing restaurant", { error, restaurant });
-        failed++;
-        errors.push({
-          restaurant: restaurant.name,
-          error: error instanceof Error ? error.message : "Unknown error",
-        });
-      }
-    }
-
-    // Return summary
-    ctx.body = {
-      success: true,
-      summary: {
-        total: restaurants.length,
-        created,
-        updated,
-        failed,
-      },
-      errors: errors.length > 0 ? errors : undefined,
-    };
+    // Return the result
+    ctx.body = result;
   } catch (error) {
     logger.error("Error in bulk import", { error });
+    throw error;
+  }
+};
+
+/**
+ * Import restaurants from a file
+ * @param ctx Koa context
+ */
+export const fileImportPlaces = async (ctx: Context): Promise<void> => {
+  try {
+    const file: formidable.File | formidable.File[] | undefined =
+      ctx.request.files?.file;
+
+    if (!file) {
+      throw badRequest("No file uploaded");
+    }
+
+    if (Array.isArray(file)) {
+      throw badRequest("Multiple files not supported");
+    }
+
+    try {
+      // Read the file contents
+      const fileContent = fs.readFileSync(file.filepath, "utf-8");
+
+      // Parse it as JSON
+      const jsonData = JSON.parse(fileContent);
+
+      // Validate that the JSON contains an array of restaurants
+      if (!Array.isArray(jsonData)) {
+        throw badRequest("File must contain an array of restaurants");
+      }
+
+      // Process the restaurant import
+      const result = await placeLogic.processRestaurantImport(
+        getPool(ctx),
+        jsonData,
+      );
+
+      // Return the result
+      ctx.body = result;
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : String(err);
+      throw badRequest(`Invalid JSON file: ${errorMessage}`);
+    }
+  } catch (error) {
+    logger.error("Error in file import", { error });
     throw error;
   }
 };
