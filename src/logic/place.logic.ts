@@ -6,6 +6,7 @@ import {
   RestaurantData,
   PlaceOutput,
   PlaceCategory,
+  PlacePetClassification,
 } from "../types/place.types";
 import * as ratingDb from "../db/rating.db";
 import { PaginationParams, PaginatedResult } from "../types/common.types";
@@ -379,14 +380,32 @@ export const processRestaurantImport = async (
 
 /**
  * Extract pet policy from restaurant data
+ * If rien -> forbidden
+ * if Dogs allowed ( et c'est tout) --> allowed
+ * If Dogs allowed inside --> allowed
+ * If Dogs allowed outside  SANS Dogs allowed inside --> Outside_only
  * @param restaurant Restaurant data
  * @returns Pet policy classification
  */
-export const extractPetPolicy = (restaurant: RestaurantData): string => {
-  const petpolicy = restaurant.about.find((item: { id: string }) => {
+export const extractPetPolicy = (restaurant: RestaurantData): PlacePetClassification => {
+  const petPolicy = restaurant.about.find((item: { id: string }) => {
     return item.id === "pets";
   });
-  return petpolicy ? "dogallowed" : "false";
+
+  if (!petPolicy?.options || !Array.isArray(petPolicy.options) || petPolicy.options.length === 0) {
+    return "unknown";
+  }
+
+  const enabledOptions = new Set(
+    petPolicy.options
+      .filter((option: { enabled: boolean; }) => option.enabled)
+      .map((option: { name: string; }) => option.name)
+  );
+
+  if (enabledOptions.has("Dogs allowed inside")) return "allowed";
+  if (enabledOptions.has("Dogs allowed outside")) return "outside_only";
+  if (enabledOptions.has("Dogs allowed")) return "allowed";
+  return "forbidden";
 };
 
 /**

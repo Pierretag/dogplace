@@ -1,5 +1,7 @@
 import { LatestRating } from "./rating.types";
 
+export type PlacePetClassification = "allowed" | "outside_only"| "unknown" | "forbidden";
+
 /**
  * Place entity interface
  */
@@ -10,7 +12,7 @@ export interface Place {
   address: string;
   category: string;
   sub_category: string;
-  pet_classification: string;
+  pet_classification: PlacePetClassification;
   map_pricelevel?: number;
   map_hours?: string | {};
   map_pricerange?: string;
@@ -39,7 +41,7 @@ export interface CreatePlaceInput {
   address: string;
   category: PlaceCategory;
   sub_category: string;
-  pet_classification: string;
+  pet_classification: PlacePetClassification;
   latitude: number;
   longitude: number;
   map_pricelevel?: number;
@@ -88,7 +90,7 @@ export interface UpdatePlaceInput {
   address?: string;
   category?: PlaceCategory;
   sub_category?: string;
-  pet_classification?: string;
+  pet_classification?: PlacePetClassification;
   latitude?: number;
   longitude?: number;
   map_pricelevel?: number;
