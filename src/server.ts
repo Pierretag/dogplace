@@ -1,5 +1,4 @@
 import Koa from "koa";
-import bodyParser from "koa-bodyparser";
 import logger from "koa-logger";
 import cors from "@koa/cors";
 import { config } from "./config/environment";
@@ -21,7 +20,6 @@ app.use(async (ctx, next) => {
 app.use(errorMiddleware);
 app.use(cors());
 app.use(logger());
-app.use(bodyParser());
 
 // Add routes
 app.use(router.routes());

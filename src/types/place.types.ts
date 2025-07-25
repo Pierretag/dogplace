@@ -29,13 +29,15 @@ export interface PlaceOutput extends Place {
   map_hours: {};
 }
 
+export type PlaceCategory = "restaurant" | "bar" | "unknown";
+
 /**
  * Input for creating a new place
  */
 export interface CreatePlaceInput {
   name: string;
   address: string;
-  category: string;
+  category: PlaceCategory;
   sub_category: string;
   pet_classification: string;
   latitude: number;
@@ -68,8 +70,8 @@ export interface RestaurantData {
     times: string[];
   }[];
   price_range?: string;
-  category?: string;
-  sub_category?: string;
+  main_category: string;
+  categories: string[];
   pet_classification?: string;
   latitude?: number;
   longitude?: number;
@@ -84,7 +86,7 @@ export interface RestaurantData {
 export interface UpdatePlaceInput {
   name?: string;
   address?: string;
-  category?: string;
+  category?: PlaceCategory;
   sub_category?: string;
   pet_classification?: string;
   latitude?: number;

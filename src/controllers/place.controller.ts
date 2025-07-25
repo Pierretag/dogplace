@@ -2,16 +2,10 @@ import { Context } from "koa";
 import { Pool } from "pg";
 import * as placeLogic from "../logic/place.logic";
 import {
-  extractPetPolicy,
-  extractHours,
-  extractPriceRange,
-} from "../logic/place.logic";
-import {
   CreatePlaceInput,
   UpdatePlaceInput,
   RestaurantData,
 } from "../types/place.types";
-import * as ratingDb from "../db/rating.db";
 import { parsePaginationParams } from "../utils/pagination";
 import { logger } from "../utils/logger";
 import { notFound, badRequest } from "../middleware/error.middleware";
@@ -187,33 +181,22 @@ export const bulkImportPlaces = async (ctx: Context): Promise<void> => {
  */
 export const fileImportPlaces = async (ctx: Context): Promise<void> => {
   try {
-    const file: formidable.File | formidable.File[] | undefined =
-      ctx.request.files?.file;
+    const body: RestaurantData[] | undefined = ctx.request.body;
 
-    if (!file) {
-      throw badRequest("No file uploaded");
-    }
-
-    if (Array.isArray(file)) {
-      throw badRequest("Multiple files not supported");
+    if (!body) {
+      throw badRequest("No body found");
     }
 
     try {
-      // Read the file contents
-      const fileContent = fs.readFileSync(file.filepath, "utf-8");
-
-      // Parse it as JSON
-      const jsonData = JSON.parse(fileContent);
-
       // Validate that the JSON contains an array of restaurants
-      if (!Array.isArray(jsonData)) {
-        throw badRequest("File must contain an array of restaurants");
+      if (!Array.isArray(body) || body[0].place_id === undefined) {
+        throw badRequest("File must contain an array of valid restaurants");
       }
 
       // Process the restaurant import
       const result = await placeLogic.processRestaurantImport(
         getPool(ctx),
-        jsonData,
+        body,
       );
 
       // Return the result

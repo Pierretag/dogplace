@@ -9,6 +9,7 @@ import {
 } from "../middleware/validation.middleware";
 import { authMiddleware } from "../middleware/auth.middleware";
 import koaBody from "koa-body";
+import bodyParser from "koa-bodyparser";
 
 // Create router
 const router = new Router({ prefix: "/api/places" });
@@ -37,7 +38,12 @@ router.get("/:id", placeController.getPlaceById);
 router.post("/", validate(validateCreatePlace), placeController.createPlace);
 
 // Update a place
-router.put("/:id", validate(validateUpdatePlace), placeController.updatePlace);
+router.put(
+  "/:id",
+  bodyParser({}),
+  validate(validateUpdatePlace),
+  placeController.updatePlace,
+);
 
 // Delete a place
 router.delete("/:id", placeController.deletePlace);
@@ -45,6 +51,7 @@ router.delete("/:id", placeController.deletePlace);
 // Bulk import places
 router.post(
   "/bulk-import",
+  bodyParser({}),
   validate(validateBulkImport),
   placeController.bulkImportPlaces,
 );
@@ -52,7 +59,13 @@ router.post(
 // Bulk form file import places
 router.post(
   "/file-import",
-  koaBody({ encoding: "UTF-8", multipart: true }),
+  koaBody({
+    formidable: { maxFieldsSize: 1024 * 1024 * 10 },
+    formLimit: 1024 * 1024 * 10,
+    jsonLimit: 1024 * 1024 * 10,
+    encoding: "UTF-8",
+    multipart: true,
+  }),
   placeController.fileImportPlaces,
 );
 

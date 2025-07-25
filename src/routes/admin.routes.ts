@@ -1,11 +1,13 @@
 import Router from "@koa/router";
 import { authMiddleware } from "../middleware/auth.middleware";
 import runMigrations from "../db/migrations/run-migrations";
+import bodyParser from "koa-bodyparser";
 
 // Create router
 const router = new Router({ prefix: "/api/admin" });
 
 // Apply authentication middleware to all routes
+router.use(bodyParser({}));
 router.use(authMiddleware);
 
 // Get all places

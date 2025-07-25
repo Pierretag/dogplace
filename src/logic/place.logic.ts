@@ -5,6 +5,7 @@ import {
   UpdatePlaceInput,
   RestaurantData,
   PlaceOutput,
+  PlaceCategory,
 } from "../types/place.types";
 import * as ratingDb from "../db/rating.db";
 import { PaginationParams, PaginatedResult } from "../types/common.types";
@@ -237,44 +238,6 @@ export const deletePlace = async (pool: Pool, id: string): Promise<boolean> => {
  * @param pagination Pagination parameters
  * @returns Paginated places
  */
-/**
- * Extract pet policy from restaurant data
- * @param restaurant Restaurant data
- * @returns Pet policy classification
- */
-export const extractPetPolicy = (restaurant: RestaurantData): string => {
-  const petpolicy = restaurant.about.find((item: { id: string }) => {
-    return item.id === "pets";
-  });
-  return petpolicy ? "dogallowed" : "false";
-};
-
-/**
- * Extract hours data from restaurant data
- * @param restaurant Restaurant data
- * @returns Hours data as JSON string or undefined if not available
- */
-export const extractHours = (
-  restaurant: RestaurantData,
-): string | undefined => {
-  if (!restaurant.hours || restaurant.hours.length === 0) {
-    return undefined;
-  }
-
-  return JSON.stringify({ hours: restaurant.hours });
-};
-
-/**
- * Extract price range from restaurant data
- * @param restaurant Restaurant data
- * @returns Price range or undefined if not available
- */
-export const extractPriceRange = (
-  restaurant: RestaurantData,
-): string | undefined => {
-  return restaurant.price_range || undefined;
-};
-
 export const searchPlaces = async (
   pool: Pool,
   filters: Record<string, any>,
@@ -345,6 +308,8 @@ export const processRestaurantImport = async (
           pet_classification: extractPetPolicy(restaurant),
           map_hours: extractHours(restaurant),
           map_pricerange: extractPriceRange(restaurant),
+          category: extractCategory(restaurant),
+          sub_category: extractSubCategory(restaurant),
         });
 
         // Create new rating entry
@@ -361,8 +326,8 @@ export const processRestaurantImport = async (
         const input: CreatePlaceInput = {
           name: restaurant.name,
           address: restaurant.address,
-          category: "restaurant",
-          sub_category: "restaurant",
+          category: extractCategory(restaurant),
+          sub_category: extractSubCategory(restaurant),
           pet_classification: extractPetPolicy(restaurant),
           latitude: restaurant.coordinates.latitude,
           longitude: restaurant.coordinates.longitude,
@@ -405,4 +370,68 @@ export const processRestaurantImport = async (
     },
     errors: errors.length > 0 ? errors : undefined,
   };
+};
+
+/**
+ * HELPERS
+ * Add data processing and parser between file input and Dogplace Datamodeling.
+ */
+
+/**
+ * Extract pet policy from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Pet policy classification
+ */
+export const extractPetPolicy = (restaurant: RestaurantData): string => {
+  const petpolicy = restaurant.about.find((item: { id: string }) => {
+    return item.id === "pets";
+  });
+  return petpolicy ? "dogallowed" : "false";
+};
+
+/**
+ * Extract hours data from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Hours data as JSON string or undefined if not available
+ */
+const extractHours = (restaurant: RestaurantData): string | undefined => {
+  if (!restaurant.hours || restaurant.hours.length === 0) {
+    return undefined;
+  }
+
+  return JSON.stringify({ hours: restaurant.hours });
+};
+
+/**
+ * Extract price range from restaurant data
+ * @param restaurant Restaurant data
+ * @returns Price range or undefined if not available
+ */
+const extractPriceRange = (restaurant: RestaurantData): string | undefined => {
+  return restaurant.price_range || undefined;
+};
+
+/**
+ * Define main type of place. Regarding if it's more a restaruant or a bar.
+ * @param restaurant Restaurant Data
+ * @returns PlaceCategory - Help define type of emoji to use
+ */
+const extractCategory = (restaurant: RestaurantData): PlaceCategory => {
+  if (restaurant.main_category != undefined) {
+    if (restaurant.main_category.match(/restaurant/gim)) return "restaurant";
+    else if (restaurant.main_category.match(/bar/gim)) return "bar";
+    else return "unknown";
+  } else return "unknown";
+};
+
+/**
+ * Define sub cateogry. type of food, type of bar.
+ * @param restaurant
+ * @returns
+ */
+const extractSubCategory = (restaurant: RestaurantData): string => {
+  return Array.isArray(restaurant.categories) &&
+    restaurant.categories.length != 0
+    ? restaurant.categories[0]
+    : "unknown";
 };
