@@ -95,12 +95,20 @@ export const getPlaceById = async (
  * Get all places with pagination
  * @param pool Database pool
  * @param pagination Pagination parameters
+ * @param filters Optional filters for the query
  * @returns Paginated places
  */
 export const getPlaces = async (
   pool: Pool,
   pagination: PaginationParams,
+  filters: Record<string, any> = {},
 ): Promise<PaginatedResult<PlaceOutput>> => {
+  // If filters are provided, use searchPlaces which already handles filtering
+  if (Object.keys(filters).length > 0) {
+    return searchPlaces(pool, filters, pagination);
+  }
+  
+  // Otherwise, use the original implementation
   const places = await placeDb.getPlaces(pool, pagination);
 
   // Get latest ratings for all places

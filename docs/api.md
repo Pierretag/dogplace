@@ -68,6 +68,7 @@ Query Parameters:
 
 - `page`: Page number (default: 1)
 - `limit`: Number of items per page (default: 10, max: 100)
+- `pet_classification`: Filter by pet classification (allowed, outside_only, unknown, forbidden)
 
 Response:
 

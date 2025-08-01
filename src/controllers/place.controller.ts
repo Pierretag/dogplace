@@ -27,12 +27,21 @@ export const getPlaces = async (ctx: Context): Promise<void> => {
     // Parse pagination parameters
     const pagination = parsePaginationParams(ctx.query);
 
-    // Get places
-    const result = await placeLogic.getPlaces(getPool(ctx), pagination);
+    // Extract pet_classification filter from query parameters if it exists
+    const { pet_classification } = ctx.query;
+    
+    // Create filters object
+    const filters: Record<string, any> = {};
+    if (pet_classification) {
+      filters.pet_classification = pet_classification;
+    }
+
+    // Get places with optional filter
+    const result = await placeLogic.getPlaces(getPool(ctx), pagination, filters);
 
     ctx.body = result;
   } catch (error) {
-    logger.error("Error getting places", { error });
+    logger.error("Error getting places", { error, query: ctx.query });
     throw error;
   }
 };
